@@ -95,9 +95,8 @@ DWORD LaunchElevatedProcess(DWORD clientProcessId, LPTSTR userName, LPTSTR comma
     if (!TokenIsElevated(clientToken)) {
         // Launch the helper program to authentication the request.
 
-        TCHAR helperCommandLine[MAX_PATH + 22];
-        _stprintf_s(helperCommandLine, MAX_PATH + 25, TEXT("%sSudoHelper.exe %s %s"),
-                    ProgramDirectory, userName, launcher);
+        TCHAR helperCommandLine[MAX_PATH + 27];
+        _stprintf_s(helperCommandLine, MAX_PATH + 27, TEXT("\"%sSudoHelper.exe\" %s %s"), ProgramDirectory, userName, launcher);
 
         HANDLE newToken;
         {
@@ -121,9 +120,9 @@ DWORD LaunchElevatedProcess(DWORD clientProcessId, LPTSTR userName, LPTSTR comma
         }
 
         PROCESS_INFORMATION helperProcessInfo;
-        if (!CreateProcessAsUser(newToken, NULL, helperCommandLine, NULL, NULL, TRUE, CREATE_UNICODE_ENVIRONMENT |
-                                    EXTENDED_STARTUPINFO_PRESENT, NULL, ProgramDirectory,
-                                    &startupInfoEx.StartupInfo, &helperProcessInfo)) {
+        if (!CreateProcessAsUser(newToken, NULL, helperCommandLine, NULL, NULL, TRUE,
+                                 CREATE_UNICODE_ENVIRONMENT | EXTENDED_STARTUPINFO_PRESENT, NULL,
+                                 ProgramDirectory, &startupInfoEx.StartupInfo, &helperProcessInfo)) {
             CloseHandle(newToken);
             goto Failed;
         }

@@ -91,11 +91,12 @@ int run(LPTSTR commandLine) {
 
 int _tmain(int argc, LPTSTR *argv) {
     if (argc == 1) {
-        _tprintf(TEXT("Usage: sudo <program> [arguments...]\n"));
+        _tprintf(TEXT("Usage: sudo <program-or-command> [arguments...]\n"));
         return -1;
     }
 
     LPTSTR commandLine = GetCommandLine();
+    LPTSTR newCommandLine;
 
     {
         bool inQuotes = false;
@@ -117,6 +118,10 @@ int _tmain(int argc, LPTSTR *argv) {
         }
     }
 
+    size_t newCommandLineLength = _tcslen(commandLine) + 8;
+    newCommandLine = (LPTSTR) malloc(sizeof(LPTSTR) * newCommandLineLength);
+    _stprintf_s(newCommandLine, newCommandLineLength, TEXT("cmd /c %s"), commandLine);
+
     _TUCHAR *stringBinding;
 
     RPC_STATUS status = RpcStringBindingCompose(NULL, (_TUCHAR *) TEXT("ncacn_np"), NULL,
@@ -131,7 +136,7 @@ int _tmain(int argc, LPTSTR *argv) {
         return status;
     }
 
-    int exitCode = run(commandLine);
+    int exitCode = run(newCommandLine);
 
     RpcStringFree(&stringBinding);
     RpcBindingFree(&RpcBindingHandle);
