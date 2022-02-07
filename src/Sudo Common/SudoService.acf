@@ -1,0 +1,5 @@
+// Copyright (c) 2022 Liu Baihao. All rights reserved.
+// This software is licensed under MIT License.
+
+[implicit_handle(handle_t RpcBindingHandle)]
+interface SudoForWindows {}

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{7e682001-34af-4d85-8103-b9d811c54086}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="sources">
+      <UniqueIdentifier>{6066428d-1489-44af-8526-8bbb309ee348}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="sources\RPC">
+      <UniqueIdentifier>{1ece4612-46b2-4cd8-8f64-3c67eeb38cdd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\SudoFramework.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\settings.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\SudoRpcX64.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\SudoRpcX86.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)RPC\ClientStubX64.c">
+      <Filter>sources\RPC</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)RPC\ClientStubX86.c">
+      <Filter>sources\RPC</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)RPC\ServerStubX64.c">
+      <Filter>sources\RPC</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)RPC\ServerStubX86.c">
+      <Filter>sources\RPC</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)settings.c">
+      <Filter>sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,13 @@
+// Copyright (c) 2022 Liu Baihao. All rights reserved.
+// This software is licensed under MIT License.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[uuid(479faa79-6f61-1499-506f-b4a54c73f96f), version(1.0)]
+interface SudoForWindows {
+    DWORD LaunchElevatedProcess([in] DWORD clientProcessId, [in, string] LPTSTR userName, [in, string] LPTSTR commandLine,
+                                [in] ULONG_PTR consoleReference, [in] DWORD environmentSize,
+                                [in, size_is(environmentSize * sizeof(TCHAR)), length_is(environmentSize)] TCHAR *environment,
+                                [in, string] LPTSTR workingDirectory, [in, string] LPTSTR launcher, [out] PULONG_PTR newProcess);
+}
