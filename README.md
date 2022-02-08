@@ -4,7 +4,7 @@ This software is licensed under [MIT Lincense](LICENSE.md).
 
 - **⚠ Warning: This software may have security vulnerabilities and should be used with caution.**
 
-[Latest release](https://github.com/LiuBaihao-Hello/Sudo-for-Windows/releases/latest)
+[Latest release](https://github.com/any-possible/Sudo-for-Windows/releases/latest)
 
 This software has a kernel-mode extension ([Kernel API Hook](src/Kernel%20API%20Hook), [Kernel Mode Entry](src/Kernel%20Mode%20Entry), [Kernel Mode Host](src/Kernel%20Mode%20Host)), but is not available now.
 
@@ -20,7 +20,7 @@ So I made this software. It can help us run commands as administrator without ha
 
 ## 2.Install
 
-First, download the compressed package of this software ([download the latest version](https://github.com/LiuBaihao-Hello/Sudo-for-Windows/releases/latest)) and extract to a secure directory (**DON'T ALLOW *STANDARD USERS* TO MODIFY THE FILES INSIDE, OTHERWISE IT MAY LEAD TO *VULNERABILITY ELEVATION***).
+First, download the compressed package of this software ([download the latest version](https://github.com/any-possible/Sudo-for-Windows/releases/latest)) and extract to a secure directory (**DON'T ALLOW *STANDARD USERS* TO MODIFY THE FILES INSIDE, OTHERWISE IT MAY LEAD TO *VULNERABILITY ELEVATION***).
 
 Use this command to create the service for this software:
 
