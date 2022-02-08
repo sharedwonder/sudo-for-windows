@@ -20,7 +20,7 @@ So I made this software. It can help us run commands as administrator without ha
 
 ## 2.Install
 
-First, download the compressed package of this software ([download the latest version](https://github.com/LiuBaihao-Hello/Sudo-for-Windows/releases/latest)) and extract to a secure directory (don't allow standard users to modify the files inside, otherwise it may lead to vulnerability elevation).
+First, download the compressed package of this software ([download the latest version](https://github.com/LiuBaihao-Hello/Sudo-for-Windows/releases/latest)) and extract to a secure directory (**DON'T ALLOW *STANDARD USERS* TO MODIFY THE FILES INSIDE, OTHERWISE IT MAY LEAD TO *VULNERABILITY ELEVATION***).
 
 Use this command to create the service for this software:
 
