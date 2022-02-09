@@ -14,9 +14,9 @@ This software has a kernel-mode extension ([Kernel API Hook](src/Kernel%20API%20
 
 As we all know, in Linux we can use sudo and su to elevate privileges (get root privileges).
 
-But in Windows, we shuold elevate privileges through UAC (User Account Control). This makes us have to open a new terminal with administrator privileges when we want to elevate the terminal to the commands.
+But in Windows, we shuold elevate privileges through UAC (User Account Control). This makes us have to open a new terminal with administrator privileges when we want to run commands as administrator.
 
-So I made this software. It can help us run commands as administrator without having to open the new terminal.
+So I made this software. It can help us run commands as administrator without having to open a new terminal.
 
 ## 2.Install
 
