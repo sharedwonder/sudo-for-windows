@@ -12,16 +12,5 @@ build/
 # Ignore libraries.
 lib/
 
-# Ignore binary files.
-*.obj
-*.exp
-*.pdb
-*.lib
-*.dll
-*.exe
-
-# Ignore log files.
-*.log
-
 # Ignore Visual Studio Code folder.
 .vscode/
