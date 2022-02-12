@@ -57,7 +57,7 @@ DWORD LaunchElevatedProcess(DWORD clientProcessId, LPTSTR userName, LPTSTR comma
     // Using to set the new process attributes.
     STARTUPINFOEX startupInfoEx;
 
-    ZeroMemory(&startupInfoEx, sizeof(startupInfoEx));
+    ZeroMemory(&startupInfoEx, sizeof(STARTUPINFOEX));
     startupInfoEx.StartupInfo.cb = sizeof(STARTUPINFOEX);
 
     // Setting the new process attributes.
