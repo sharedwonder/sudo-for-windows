@@ -25,10 +25,10 @@ First, download the compressed package of this software ([download the latest ve
 Use this command to create the service for this software:
 
 ```powershell
-sc create SudoService type= own start= auto binPath= "<SERVICE_PROGRAM>" DisplayName= "Sudo for Windows Service"
+sc create SudoService type= own start= auto binPath= "<service>" DisplayName= "Sudo for Windows Service"
 ```
 
-- Replace <SERVICE_PROGRAM> with the path to "SudoService.exe".
+- Replace <service> with the path to "SudoService.exe".
 
 Then, start the service:
 
