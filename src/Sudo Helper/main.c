@@ -65,6 +65,8 @@ int _tmain(int argc, LPTSTR *argv) {
 
             goto Exit;
         }
+        // For security reasons, when the password is no longer needed, fill it with zero.
+        ZeroMemory(password, PASSWORD_MAX_LENGTH + 1);
 
         SetLastError(ERROR_SUCCESS);
         goto Exit;
