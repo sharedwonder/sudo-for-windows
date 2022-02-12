@@ -28,7 +28,7 @@ Use this command to create the service for this software:
 sc create SudoService type= own start= auto binPath= "<service>" DisplayName= "Sudo for Windows Service"
 ```
 
-- Replace <service> with the path to "SudoService.exe".
+- Replace \<service\> with the path to "SudoService.exe".
 
 Then, start the service:
 
