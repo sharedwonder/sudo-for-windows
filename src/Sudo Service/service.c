@@ -27,15 +27,13 @@ _Success_(return) BOOL QueryTokenInformation(_In_ HANDLE token, _In_ TOKEN_INFOR
 }
 
 BOOL TokenIsElevated(_In_ HANDLE token) {
-    BOOL isSuccess;
     TOKEN_ELEVATION tokenElevation;
 
-    isSuccess = QueryTokenInformation(token, TokenElevation, &tokenElevation);
-    if (!isSuccess || !tokenElevation.TokenIsElevated) {
+    if (!QueryTokenInformation(token, TokenElevation, &tokenElevation)) {
         return FALSE;
     }
 
-    return isSuccess;
+    return tokenElevation.TokenIsElevated;
 }
 
 DWORD LaunchElevatedProcess(DWORD clientProcessId, LPTSTR userName, LPTSTR commandLine,
