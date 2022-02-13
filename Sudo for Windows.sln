@@ -6,7 +6,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Root", "Root", "{93EFA5FE-2
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		COPYRIGHT = COPYRIGHT
-		LICENSE.md = LICENSE.md
+		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
 EndProject
