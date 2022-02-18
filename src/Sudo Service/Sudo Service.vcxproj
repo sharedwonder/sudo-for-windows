@@ -111,6 +111,11 @@
       <AdditionalDependencies>rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
+    <Midl>
+      <HeaderFileName>..\Sudo Common\include\SudoRpcX86.h</HeaderFileName>
+    </Midl>
+    <Midl />
+    <Midl />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -129,6 +134,11 @@
       <AdditionalDependencies>rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
+    <Midl>
+      <HeaderFileName>..\Sudo Common\include\SudoRpcX86.h</HeaderFileName>
+    </Midl>
+    <Midl />
+    <Midl />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -143,6 +153,14 @@
       <AdditionalDependencies>rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
+    <Midl>
+      <HeaderFileName>..\Sudo Common\include\SudoRpcX64.h</HeaderFileName>
+    </Midl>
+    <Midl />
+    <Midl>
+      <ClientStubFile>..\Sudo Common\RPC\ClientStubX64.c</ClientStubFile>
+      <ServerStubFile>..\Sudo Common\RPC\ServerStubX64.c</ServerStubFile>
+    </Midl>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -161,6 +179,13 @@
       <AdditionalDependencies>rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
+    <Midl>
+      <HeaderFileName>..\Sudo Common\include\SudoRpcX64.h</HeaderFileName>
+      <ClientStubFile>..\Sudo Common\RPC\ClientStubX64.c</ClientStubFile>
+      <ServerStubFile>..\Sudo Common\RPC\ServerStubX64.c</ServerStubFile>
+    </Midl>
+    <Midl />
+    <Midl />
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ServerStubX64.c" />
@@ -170,6 +195,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\service.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SudoService.acf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="SudoService.idl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

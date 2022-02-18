@@ -29,4 +29,12 @@
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="SudoService.acf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="SudoService.idl">
+      <Filter>sources</Filter>
+    </Midl>
+  </ItemGroup>
 </Project>
