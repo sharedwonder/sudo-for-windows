@@ -2,6 +2,7 @@
 // This software is licensed under MIT License.
 
 #include "service.h"
+#include "configuration.h"
 
 #include <direct.h>
 #include <time.h>
@@ -47,16 +48,15 @@ DWORD LaunchElevatedProcess(DWORD clientProcessId, LPTSTR userName, LPTSTR comma
 
     HANDLE clientProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, clientProcessId);
     if (clientProcess == INVALID_HANDLE_VALUE) {
-        LogWriteLineEx(TEXT("Failed to elevated permission, client process ID: %u, user: %s"), 89,
-                       LOG_INFO, clientProcessId, userName);
+        LogWriteLineEx(TEXT("Failed to elevated permission, client process ID: %u, user: %s, error code: %u"), 109,
+                       LOG_INFO, clientProcessId, userName, GetLastError());
         return GetLastError();
     }
 
     // Using to set the new process attributes.
-    STARTUPINFOEX startupInfoEx;
-
-    ZeroMemory(&startupInfoEx, sizeof(STARTUPINFOEX));
-    startupInfoEx.StartupInfo.cb = sizeof(STARTUPINFOEX);
+    STARTUPINFOEX startupInfoEx = {
+        .StartupInfo.cb = sizeof(STARTUPINFOEX)
+    };
 
     // Setting the new process attributes.
     {
@@ -65,6 +65,7 @@ DWORD LaunchElevatedProcess(DWORD clientProcessId, LPTSTR userName, LPTSTR comma
         InitializeProcThreadAttributeList(NULL, 2, 0, &returnLength);
         startupInfoEx.lpAttributeList = (LPPROC_THREAD_ATTRIBUTE_LIST) malloc(returnLength);
         if (startupInfoEx.lpAttributeList == NULL) {
+            SetLastError(ERROR_NOT_ENOUGH_MEMORY);
             goto Failed;
         }
 
@@ -94,7 +95,8 @@ DWORD LaunchElevatedProcess(DWORD clientProcessId, LPTSTR userName, LPTSTR comma
         // Launch the helper program to authentication the request.
 
         TCHAR helperCommandLine[MAX_PATH + 27];
-        _stprintf_s(helperCommandLine, MAX_PATH + 27, TEXT("\"%sSudoHelper.exe\" %s %s"), ProgramDirectory, userName, launcher);
+        _stprintf_s(helperCommandLine, sizeof(helperCommandLine) / sizeof(TCHAR) - 1,
+                    TEXT("\"%sSudoHelper.exe\" %s %s"), ProgramDirectory, userName, launcher);
 
         HANDLE newToken;
         {
@@ -176,8 +178,8 @@ DWORD LaunchElevatedProcess(DWORD clientProcessId, LPTSTR userName, LPTSTR comma
     return ERROR_SUCCESS;
 
 Failed:
-    LogWriteLineEx(TEXT("Failed to elevated permission, client process ID: %u, user: %s"), 89,
-                   LOG_INFO, clientProcessId, userName);
+    LogWriteLineEx(TEXT("Failed to elevated permission, client process ID: %u, user: %s, error code: %u"), 109,
+                   LOG_INFO, clientProcessId, userName, GetLastError());
 
     CloseHandle(clientProcess);
     free(startupInfoEx.lpAttributeList);
@@ -242,8 +244,9 @@ DWORD WINAPI ServiceRun() {
 void WINAPI __callback ControlHandler(DWORD control) {
     switch (control) {
     case SERVICE_CONTROL_STOP: case SERVICE_CONTROL_SHUTDOWN:
-        CloseHandle(LogFileHandle);
         LogWriteLine(TEXT("Sudo for Windows Service stopped, Exit code: 0"), LOG_INFO);
+        CloseHandle(LogFileHandle);
+
         ServiceStatus.dwWin32ExitCode = 0;
         ServiceStatus.dwCurrentState = SERVICE_STOPPED;
         SetServiceStatus(ServiceStatusHandle, &ServiceStatus);
@@ -330,7 +333,10 @@ void WINAPI ServiceMain(DWORD argc, LPTSTR *argv) {
     _tcsrchr(ProgramDirectory, TEXT('\\'))[1] = '\0';
 
     ServiceStatus.dwWin32ExitCode = ServiceRun();
+
     LogWriteLineEx(TEXT("Sudo for Windows Service stopped. Exit code: %d"), 56, LOG_INFO, ServiceStatus.dwWin32ExitCode);
+    CloseHandle(LogFileHandle);
+
     ServiceStatus.dwCurrentState = SERVICE_STOPPED;
     SetServiceStatus(ServiceStatusHandle, &ServiceStatus);
 }

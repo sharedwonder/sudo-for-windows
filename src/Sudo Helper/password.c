@@ -50,7 +50,7 @@ _Success_(return) BOOL ReadPassword(_Out_writes_all_(PASSWORD_MAX_LENGTH + 1) LP
     }
 }
 
-BOOL VerifyPassword(LPTSTR userName, LPTSTR password) {
+BOOL VerifyPassword(_In_ LPTSTR userName, _In_ LPTSTR password) {
     HANDLE token;
-    return LogonUser(userName, NULL, password, LOGON32_LOGON_INTERACTIVE, LOGON32_LOGON_INTERACTIVE, &token);
+    return LogonUser(userName, NULL, password, LOGON32_LOGON_INTERACTIVE, LOGON32_PROVIDER_DEFAULT, &token);
 }

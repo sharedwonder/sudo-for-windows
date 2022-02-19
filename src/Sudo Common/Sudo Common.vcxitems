@@ -14,7 +14,6 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)include\settings.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\SudoFramework.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\SudoRpcX64.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\SudoRpcX86.h" />
@@ -24,6 +23,5 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)RPC\ClientStubX86.c" />
     <ClCompile Include="$(MSBuildThisFileDirectory)RPC\ServerStubX64.c" />
     <ClCompile Include="$(MSBuildThisFileDirectory)RPC\ServerStubX86.c" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)settings.c" />
   </ItemGroup>
 </Project>

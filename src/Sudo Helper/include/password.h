@@ -10,4 +10,4 @@
 
 _Success_(return) BOOL ReadPassword(_Out_writes_all_(PASSWORD_MAX_LENGTH + 1) LPTSTR password);
 
-BOOL VerifyPassword(LPTSTR userName, LPTSTR password);
+BOOL VerifyPassword(_In_ LPTSTR userName, _In_ LPTSTR password);

@@ -74,14 +74,14 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\cache\</IntDir>
-    <IncludePath>include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
+    <IncludePath>include;$(SolutionDir)src\Sudo Configuration\include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
     <TargetName>SudoService</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\cache\</IntDir>
-    <IncludePath>include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
+    <IncludePath>include;$(SolutionDir)src\Sudo Configuration\include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
     <TargetName>SudoService</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -89,13 +89,13 @@
     <TargetName>SudoService</TargetName>
     <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\cache\</IntDir>
-    <IncludePath>include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
+    <IncludePath>include;$(SolutionDir)src\Sudo Configuration\include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\cache\</IntDir>
-    <IncludePath>include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
+    <IncludePath>include;$(SolutionDir)src\Sudo Configuration\include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
     <TargetName>SudoService</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -108,11 +108,14 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SudoConfiguration.lib;rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\</AdditionalLibraryDirectories>
     </Link>
     <Midl>
-      <HeaderFileName>..\Sudo Common\include\SudoRpcX86.h</HeaderFileName>
+      <HeaderFileName>$(SolutionDir)src\Sudo Common\include\SudoRpcX86.h</HeaderFileName>
+      <ClientStubFile>$(SolutionDir)src\Sudo Common\RPC\ClientStubX86.c</ClientStubFile>
+      <ServerStubFile>$(SolutionDir)src\Sudo Common\RPC\ServerStubX86.c</ServerStubFile>
     </Midl>
     <Midl />
     <Midl />
@@ -131,11 +134,14 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SudoConfiguration.lib;rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\</AdditionalLibraryDirectories>
     </Link>
     <Midl>
-      <HeaderFileName>..\Sudo Common\include\SudoRpcX86.h</HeaderFileName>
+      <HeaderFileName>$(SolutionDir)src\Sudo Common\include\SudoRpcX86.h</HeaderFileName>
+      <ClientStubFile>$(SolutionDir)src\Sudo Common\RPC\ClientStubX86.c</ClientStubFile>
+      <ServerStubFile>$(SolutionDir)src\Sudo Common\RPC\ServerStubX86.c</ServerStubFile>
     </Midl>
     <Midl />
     <Midl />
@@ -150,16 +156,17 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SudoConfiguration.lib;rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\</AdditionalLibraryDirectories>
     </Link>
     <Midl>
-      <HeaderFileName>..\Sudo Common\include\SudoRpcX64.h</HeaderFileName>
+      <HeaderFileName>$(SolutionDir)src\Sudo Common\include\SudoRpcX64.h</HeaderFileName>
     </Midl>
     <Midl />
     <Midl>
-      <ClientStubFile>..\Sudo Common\RPC\ClientStubX64.c</ClientStubFile>
-      <ServerStubFile>..\Sudo Common\RPC\ServerStubX64.c</ServerStubFile>
+      <ClientStubFile>$(SolutionDir)src\Sudo Common\RPC\ClientStubX64.c</ClientStubFile>
+      <ServerStubFile>$(SolutionDir)src\Sudo Common\RPC\ServerStubX64.c</ServerStubFile>
     </Midl>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -176,13 +183,14 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SudoConfiguration.lib;rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\</AdditionalLibraryDirectories>
     </Link>
     <Midl>
-      <HeaderFileName>..\Sudo Common\include\SudoRpcX64.h</HeaderFileName>
-      <ClientStubFile>..\Sudo Common\RPC\ClientStubX64.c</ClientStubFile>
-      <ServerStubFile>..\Sudo Common\RPC\ServerStubX64.c</ServerStubFile>
+      <HeaderFileName>$(SolutionDir)src\Sudo Common\include\SudoRpcX64.h</HeaderFileName>
+      <ClientStubFile>$(SolutionDir)src\Sudo Common\RPC\ClientStubX64.c</ClientStubFile>
+      <ServerStubFile>$(SolutionDir)src\Sudo Common\RPC\ServerStubX64.c</ServerStubFile>
     </Midl>
     <Midl />
     <Midl />

@@ -20,9 +20,6 @@
     <ClCompile Include="ClientStubX86.c">
       <Filter>sources</Filter>
     </ClCompile>
-    <ClCompile Include="settings.c">
-      <Filter>sources</Filter>
-    </ClCompile>
     <ClCompile Include="password.c">
       <Filter>sources</Filter>
     </ClCompile>

@@ -2,7 +2,7 @@
 // This software is licensed under MIT License.
 
 #include "SudoFramework.h"
-#include "settings.h"
+#include "configuration.h"
 
 #include <signal.h>
 #include <conio.h>
@@ -17,8 +17,6 @@ void __RPC_USER midl_user_free(_Pre_maybenull_ _Post_invalid_ void __RPC_FAR *po
 }
 
 int run() {
-    ReadSudoSettings();
-
     signal(SIGINT, SIG_IGN); // Disable Ctrl+C.
 
     TCHAR userName[20];

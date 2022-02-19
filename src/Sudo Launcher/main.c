@@ -2,7 +2,7 @@
 // This software is licensed under MIT License.
 
 #include "SudoFramework.h"
-#include "settings.h"
+#include "configuration.h"
 
 #include <signal.h>
 
@@ -16,8 +16,6 @@ void __RPC_USER midl_user_free(_Pre_maybenull_ _Post_invalid_ void __RPC_FAR *po
 }
 
 int run(LPTSTR commandLine) {
-    ReadSudoSettings();
-
     signal(SIGINT, SIG_IGN); // Disable Ctrl+C.
 
     TCHAR userName[20];
@@ -91,7 +89,7 @@ int run(LPTSTR commandLine) {
 
 int _tmain(int argc, LPTSTR *argv) {
     if (argc == 1) {
-        _tprintf(TEXT("Usage: sudo <program-or-command> [arguments...]\n"));
+        _tprintf(TEXT("Usage: sudo <commandline...>\n"));
         return -1;
     }
 
@@ -118,9 +116,12 @@ int _tmain(int argc, LPTSTR *argv) {
         }
     }
 
-    size_t newCommandLineLength = _tcslen(commandLine) + 8;
-    newCommandLine = (LPTSTR) malloc(sizeof(LPTSTR) * newCommandLineLength);
-    _stprintf_s(newCommandLine, newCommandLineLength, TEXT("cmd /c %s"), commandLine);
+    size_t newCommandLineSize = _tcslen(commandLine) + 8;
+    newCommandLine = (LPTSTR) malloc(sizeof(LPTSTR) * newCommandLineSize);
+    if (newCommandLine == NULL) {
+        return ERROR_NOT_ENOUGH_MEMORY;
+    }
+    _stprintf_s(newCommandLine, newCommandLineSize, TEXT("cmd /c %s"), commandLine);
 
     _TUCHAR *stringBinding;
 

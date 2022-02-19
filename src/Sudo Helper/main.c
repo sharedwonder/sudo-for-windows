@@ -2,7 +2,7 @@
 // This software is licensed under MIT License.
 
 #include "SudoFramework.h"
-#include "settings.h"
+#include "configuration.h"
 #include "password.h"
 
 _Must_inspect_result_ _Ret_maybenull_ _Post_writable_byte_size_(size)
@@ -15,8 +15,6 @@ void __RPC_USER midl_user_free(_Pre_maybenull_ _Post_invalid_ void __RPC_FAR *po
 }
 
 int _tmain(int argc, LPTSTR *argv) {
-    ReadSudoSettings();
-
     _TUCHAR *stringBinding;
 
     RPC_STATUS status = RpcStringBindingCompose(NULL, (_TUCHAR *) TEXT("ncacn_np"), NULL,
@@ -35,7 +33,7 @@ int _tmain(int argc, LPTSTR *argv) {
     LPTSTR launcher = argv[2];
 
     // Try to get the password of the user and create a new process.
-    for (DWORD attempt = 0; attempt < SudoHelperSettings.ATTEMPT_LIMIT; ++ attempt) {
+    for (DWORD attempt = 0; attempt < SudoConfig.AttemptLimit; ++ attempt) {
         _tprintf(TEXT("[%s] password for %s: "), launcher, userName);
         TCHAR password[PASSWORD_MAX_LENGTH + 1] = {TEXT('\0')};
 

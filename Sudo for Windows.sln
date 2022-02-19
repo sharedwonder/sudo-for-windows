@@ -22,16 +22,30 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Kernel Mode Host", "src\Kernel Mode Host\Kernel Mode Host.vcxproj", "{78F3FA41-9949-40B9-B3A7-8415DD5DA8CD}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sudo Launcher", "src\Sudo Launcher\Sudo Launcher.vcxproj", "{7968D334-E2DB-4DD7-B671-3C8455F65FBF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B8E0FF89-AD22-48B4-B6B5-A18AE8460B5E} = {B8E0FF89-AD22-48B4-B6B5-A18AE8460B5E}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sudo Service", "src\Sudo Service\Sudo Service.vcxproj", "{C1C432A1-BA5F-4FA9-A44F-973B71598DAF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B8E0FF89-AD22-48B4-B6B5-A18AE8460B5E} = {B8E0FF89-AD22-48B4-B6B5-A18AE8460B5E}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sudo", "Sudo", "{CE75C1B7-7AE4-4CF8-B059-6DACF27A6DBB}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sudo Common", "src\Sudo Common\Sudo Common.vcxitems", "{6BF1131E-7F67-44DF-9C56-C2E749F24184}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Su Launcher", "src\Su Launcher\Su Launcher.vcxproj", "{86DE336E-4487-40E0-851E-D98D61F52650}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B8E0FF89-AD22-48B4-B6B5-A18AE8460B5E} = {B8E0FF89-AD22-48B4-B6B5-A18AE8460B5E}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sudo Helper", "src\Sudo Helper\Sudo Helper.vcxproj", "{6F0EB951-D188-4D66-8008-AE22101BBF97}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B8E0FF89-AD22-48B4-B6B5-A18AE8460B5E} = {B8E0FF89-AD22-48B4-B6B5-A18AE8460B5E}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sudo Configuration", "src\Sudo Configuration\Sudo Configuration.vcxproj", "{B8E0FF89-AD22-48B4-B6B5-A18AE8460B5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +119,15 @@ Global
 		{6F0EB951-D188-4D66-8008-AE22101BBF97}.Release|x86.ActiveCfg = Release|Win32
 		{6F0EB951-D188-4D66-8008-AE22101BBF97}.Release|x86.Build.0 = Release|Win32
 		{6F0EB951-D188-4D66-8008-AE22101BBF97}.Release|x86.Deploy.0 = Release|Win32
+		{B8E0FF89-AD22-48B4-B6B5-A18AE8460B5E}.Debug|x64.ActiveCfg = Debug|x64
+		{B8E0FF89-AD22-48B4-B6B5-A18AE8460B5E}.Debug|x64.Build.0 = Debug|x64
+		{B8E0FF89-AD22-48B4-B6B5-A18AE8460B5E}.Debug|x86.ActiveCfg = Debug|Win32
+		{B8E0FF89-AD22-48B4-B6B5-A18AE8460B5E}.Debug|x86.Build.0 = Debug|Win32
+		{B8E0FF89-AD22-48B4-B6B5-A18AE8460B5E}.Release|x64.ActiveCfg = Release|x64
+		{B8E0FF89-AD22-48B4-B6B5-A18AE8460B5E}.Release|x64.Build.0 = Release|x64
+		{B8E0FF89-AD22-48B4-B6B5-A18AE8460B5E}.Release|x64.Deploy.0 = Release|x64
+		{B8E0FF89-AD22-48B4-B6B5-A18AE8460B5E}.Release|x86.ActiveCfg = Release|Win32
+		{B8E0FF89-AD22-48B4-B6B5-A18AE8460B5E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -120,6 +143,7 @@ Global
 		{6BF1131E-7F67-44DF-9C56-C2E749F24184} = {CE75C1B7-7AE4-4CF8-B059-6DACF27A6DBB}
 		{86DE336E-4487-40E0-851E-D98D61F52650} = {CE75C1B7-7AE4-4CF8-B059-6DACF27A6DBB}
 		{6F0EB951-D188-4D66-8008-AE22101BBF97} = {CE75C1B7-7AE4-4CF8-B059-6DACF27A6DBB}
+		{B8E0FF89-AD22-48B4-B6B5-A18AE8460B5E} = {CE75C1B7-7AE4-4CF8-B059-6DACF27A6DBB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D84C5163-1B6C-41C4-B662-D9DC848DEB11}

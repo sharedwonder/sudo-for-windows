@@ -23,11 +23,11 @@
 
 #include "KMH_Framework.h"
 
-#ifdef NTKERNELAPILIBRARY_EXPORTS
+#ifdef KERNELAPIHOST_EXPORTS
 #define KERNEL_API __declspec(dllexport)
 #else
 #define KERNEL_API __declspec(dllimport)
-#endif // NTKERNELAPILIBRARY_EXPORTS
+#endif // KERNELAPIHOST_EXPORTS
 
 #define WINNT_API KERNEL_API
 

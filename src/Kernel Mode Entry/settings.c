@@ -62,9 +62,7 @@ VOID DriverLoadSettings(_Out_ KME_DriverSettings *driverSettings) {
                "[KernelModeEntry: DriverLoadSettings] The driver loaded settings.\n"));
 }
 
-VOID DriverSaveSettings(
-    _In_ KME_DriverSettings *driverSettings
-) {
+VOID DriverSaveSettings(_In_ KME_DriverSettings *driverSettings) {
     UNREFERENCED_PARAMETER(driverSettings);
 }
 

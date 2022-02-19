@@ -20,8 +20,5 @@
     <ClCompile Include="main.c">
       <Filter>sources</Filter>
     </ClCompile>
-    <ClCompile Include="settings.c">
-      <Filter>sources</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

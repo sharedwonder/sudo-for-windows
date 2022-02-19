@@ -1,8 +1,8 @@
 // Copyright (c) 2022 Liu Baihao. All rights reserved.
 // This software is licensed under MIT License.
 
-#include "service.h"
 #include "SudoFramework.h"
+#include "service.h"
 
 int main() {
     SERVICE_TABLE_ENTRY ServiceTable[2];

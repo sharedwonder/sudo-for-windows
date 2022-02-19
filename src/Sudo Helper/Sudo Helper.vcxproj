@@ -74,28 +74,28 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\cache\</IntDir>
-    <IncludePath>include;$(SolutionDir)src\Sudo Common\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>include;$(SolutionDir)src\Sudo Configuration\include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
     <TargetName>SudoHelper</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\cache\</IntDir>
-    <IncludePath>include;$(SolutionDir)src\Sudo Common\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>include;$(SolutionDir)src\Sudo Configuration\include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
     <TargetName>SudoHelper</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\cache\</IntDir>
-    <IncludePath>include;$(SolutionDir)src\Sudo Common\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>include;$(SolutionDir)src\Sudo Configuration\include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
     <TargetName>SudoHelper</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\cache\</IntDir>
-    <IncludePath>include;$(SolutionDir)src\Sudo Common\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>include;$(SolutionDir)src\Sudo Configuration\include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
     <TargetName>SudoHelper</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -109,7 +109,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SudoConfiguration.lib;rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -127,7 +128,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SudoConfiguration.lib;rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -141,7 +143,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SudoConfiguration.lib;rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -159,12 +162,12 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SudoConfiguration.lib;rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="password.c" />
-    <ClCompile Include="settings.c" />
     <ClCompile Include="ClientStubX64.c" />
     <ClCompile Include="ClientStubX86.c" />
     <ClCompile Include="main.c" />
