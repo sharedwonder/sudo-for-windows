@@ -46,7 +46,7 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID reserved) {
         if (NTDLL == NULL) {
             return FALSE;
         }
-        KERNEL_MODE_HOST = LoadLibrary(KERNEL_MODE_HOST_DLL_NAME);
+        KERNEL_MODE_HOST = LoadLibrary(TEXT(KERNEL_MODE_HOST_DLL_NAME));
         if (NTDLL == NULL) {
             return FALSE;
         }
