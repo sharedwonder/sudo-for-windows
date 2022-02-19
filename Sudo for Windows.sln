@@ -4,6 +4,7 @@ VisualStudioVersion = 16.0.32002.261
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Root", "Root", "{93EFA5FE-2DBC-4A5D-901E-D013E3EE0605}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		.gitignore = .gitignore
 		COPYRIGHT = COPYRIGHT
 		LICENSE = LICENSE

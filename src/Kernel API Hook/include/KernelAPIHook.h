@@ -5,8 +5,4 @@
 
 #include "KernelModeHost.h"
 
-#ifdef _DEBUG
-#define KRNLAPI_HOOK_DLL_NAME TEXT("KernelAPIHook_d.dll")
-#else
-#define KRNLAPI_HOOK_DLL_NAME TEXT("KernelAPIHook.dll")
-#endif // _DEBUG
+#define KRNLAPI_HOOK_DLL_NAME "KernelAPIHook.dll"

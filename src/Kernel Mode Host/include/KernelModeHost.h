@@ -31,11 +31,7 @@
 
 #define WINNT_API KERNEL_API
 
-#ifdef _DEBUG
-#define KERNEL_MODE_HOST_DLL_NAME TEXT("KernelModeHost_d.dll")
-#else
-#define KERNEL_MODE_HOST_DLL_NAME TEXT("KernelModeHost.dll")
-#endif // _DEBUG
+#define KERNEL_MODE_HOST_DLL_NAME "KernelModeHost.dll"
 
 EXTERN_C_START
 

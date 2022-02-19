@@ -73,7 +73,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <TargetName>KernelAPIHook_d</TargetName>
+    <TargetName>KernelAPIHook</TargetName>
     <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\cache\</IntDir>
     <IncludePath>include;$(SolutionDir)src\Kernel Mode Host\include;$(SolutionDir)lib\detours\include;$(IncludePath)</IncludePath>
@@ -89,7 +89,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <TargetName>KernelAPIHook_d</TargetName>
+    <TargetName>KernelAPIHook</TargetName>
     <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\cache\</IntDir>
     <IncludePath>include;$(SolutionDir)src\Kernel Mode Host\include;$(SolutionDir)lib\detours\include;$(IncludePath)</IncludePath>

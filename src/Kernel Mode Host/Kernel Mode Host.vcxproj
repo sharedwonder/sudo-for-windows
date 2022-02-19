@@ -75,7 +75,7 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\cache\</IntDir>
-    <TargetName>KernelModeHost_d</TargetName>
+    <TargetName>KernelModeHost</TargetName>
     <IncludePath>include;$(SolutionDir)src\Kernel Mode Entry\include\public;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -89,7 +89,7 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\cache\</IntDir>
-    <TargetName>KernelModeHost_d</TargetName>
+    <TargetName>KernelModeHost</TargetName>
     <IncludePath>include;$(SolutionDir)src\Kernel Mode Entry\include\public;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
