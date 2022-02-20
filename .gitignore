@@ -9,6 +9,9 @@
 # Ignore build folder.
 build/
 
+# Ignore release folder.
+release/
+
 # Ignore libraries.
 lib/
 

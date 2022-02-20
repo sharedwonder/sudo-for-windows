@@ -6,7 +6,7 @@
  /* File created by MIDL compiler version 8.01.0626 */
 /* at Tue Jan 19 11:14:07 2038
  */
-/* Compiler settings for ..\SudoService.idl, ..\SudoService.acf:
+/* Compiler settings for SudoService.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 8.01.0626 
     protocol : dce , ms_ext, c_ext, robust
     error checks: allocation ref bounds_check enum stub_data 
@@ -16,12 +16,11 @@
 */
 /* @@MIDL_FILE_HEADING(  ) */
 
-#pragma warning( disable: 4049 )  /* more than 64k source lines */
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 475
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 #include "rpc.h"

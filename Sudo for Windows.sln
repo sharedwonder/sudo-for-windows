@@ -25,6 +25,7 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sudo Launcher", "src\Sudo Launcher\Sudo Launcher.vcxproj", "{7968D334-E2DB-4DD7-B671-3C8455F65FBF}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B8E0FF89-AD22-48B4-B6B5-A18AE8460B5E} = {B8E0FF89-AD22-48B4-B6B5-A18AE8460B5E}
+		{C1C432A1-BA5F-4FA9-A44F-973B71598DAF} = {C1C432A1-BA5F-4FA9-A44F-973B71598DAF}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sudo Service", "src\Sudo Service\Sudo Service.vcxproj", "{C1C432A1-BA5F-4FA9-A44F-973B71598DAF}"
@@ -39,11 +40,13 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Su Launcher", "src\Su Launcher\Su Launcher.vcxproj", "{86DE336E-4487-40E0-851E-D98D61F52650}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B8E0FF89-AD22-48B4-B6B5-A18AE8460B5E} = {B8E0FF89-AD22-48B4-B6B5-A18AE8460B5E}
+		{C1C432A1-BA5F-4FA9-A44F-973B71598DAF} = {C1C432A1-BA5F-4FA9-A44F-973B71598DAF}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sudo Helper", "src\Sudo Helper\Sudo Helper.vcxproj", "{6F0EB951-D188-4D66-8008-AE22101BBF97}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B8E0FF89-AD22-48B4-B6B5-A18AE8460B5E} = {B8E0FF89-AD22-48B4-B6B5-A18AE8460B5E}
+		{C1C432A1-BA5F-4FA9-A44F-973B71598DAF} = {C1C432A1-BA5F-4FA9-A44F-973B71598DAF}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sudo Configuration", "src\Sudo Configuration\Sudo Configuration.vcxproj", "{B8E0FF89-AD22-48B4-B6B5-A18AE8460B5E}"
