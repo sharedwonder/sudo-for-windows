@@ -61,5 +61,22 @@ At last, remove the directory where the software is stored.
 ## 4.Build
 
 Environment:
-> Microsoft Visual Studio 2019 with
->> Microsoft Visual C++ v142 Build Tools
+
+- **[Microsoft Visual Studio 2019](https://aka.ms/vs)** or more *with* **Microsoft Visual C++ Build Tools v142** or more
+
+Commands:
+
+```powershell
+git clone https://github.com/any-possible/Sudo-for-Windows.git
+cd Sudo-for-Windows
+msbuild "Sudo for Windows.sln" -property:Configuration=Release -property:Platform=x64 # or "x86" if you want
+```
+
+Then you can see the target files in the directory "release/x64" (or "release/x86" if building with Platform=x86).
+There should be the following target files:
+
+- su.exe
+- sudo.exe
+- SudoConfiguration.dll
+- SudoHelper.exe
+- SudoService.exe
