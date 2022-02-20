@@ -72,7 +72,7 @@ cd Sudo-for-Windows
 msbuild "Sudo for Windows.sln" -property:Configuration=Release -property:Platform=x64 # or "x86" if you want
 ```
 
-Then you can see the target files in the directory "release/x64" (or "release/x86" if building with Platform=x86).
+Then you can see the target files in the directory "release\\x64" (or "release\\x86" if building with Platform=x86).
 There should be the following target files:
 
 - su.exe
