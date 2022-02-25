@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ClientStubX64.c" />
-    <ClCompile Include="ClientStubX86.c" />
+    <ClCompile Include="RPC\ClientStubX64.c" />
+    <ClCompile Include="RPC\ClientStubX86.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

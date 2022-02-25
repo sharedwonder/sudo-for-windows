@@ -9,6 +9,9 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
+    <Filter Include="sources\RPC">
+      <UniqueIdentifier>{8897958d-e415-4851-bd03-8f3f86e3fe52}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
@@ -17,11 +20,11 @@
     <ClCompile Include="service.c">
       <Filter>sources</Filter>
     </ClCompile>
-    <ClCompile Include="ServerStubX64.c">
-      <Filter>sources</Filter>
+    <ClCompile Include="..\Sudo Common\RPC\ServerStubX64.c">
+      <Filter>sources\RPC</Filter>
     </ClCompile>
-    <ClCompile Include="ServerStubX86.c">
-      <Filter>sources</Filter>
+    <ClCompile Include="..\Sudo Common\RPC\ServerStubX86.c">
+      <Filter>sources\RPC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

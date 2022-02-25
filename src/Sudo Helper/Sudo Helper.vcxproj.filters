@@ -9,19 +9,22 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
+    <Filter Include="sources\RPC">
+      <UniqueIdentifier>{693da817-b989-474d-bcf1-9618d9b5f897}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
       <Filter>sources</Filter>
     </ClCompile>
-    <ClCompile Include="ClientStubX64.c">
-      <Filter>sources</Filter>
-    </ClCompile>
-    <ClCompile Include="ClientStubX86.c">
-      <Filter>sources</Filter>
-    </ClCompile>
     <ClCompile Include="password.c">
       <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="RPC\ClientStubX64.c">
+      <Filter>sources\RPC</Filter>
+    </ClCompile>
+    <ClCompile Include="RPC\ClientStubX86.c">
+      <Filter>sources\RPC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

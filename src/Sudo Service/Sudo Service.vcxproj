@@ -208,8 +208,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ServerStubX64.c" />
-    <ClCompile Include="ServerStubX86.c" />
+    <ClCompile Include="..\Sudo Common\RPC\ServerStubX64.c" />
+    <ClCompile Include="..\Sudo Common\RPC\ServerStubX86.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="service.c" />
   </ItemGroup>

@@ -25,6 +25,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)RPC\ServerStubX86.c">
+      <Filter>sources\RPC</Filter>
+    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)RPC\ClientStubX64.c">
       <Filter>sources\RPC</Filter>
     </ClCompile>
@@ -32,9 +35,6 @@
       <Filter>sources\RPC</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)RPC\ServerStubX64.c">
-      <Filter>sources\RPC</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)RPC\ServerStubX86.c">
       <Filter>sources\RPC</Filter>
     </ClCompile>
   </ItemGroup>

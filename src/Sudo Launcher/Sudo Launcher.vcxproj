@@ -179,8 +179,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ClientStubX64.c" />
-    <ClCompile Include="ClientStubX86.c" />
+    <ClCompile Include="RPC\ClientStubX86.c" />
+    <ClCompile Include="RPC\ClientStubX64.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
