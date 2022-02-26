@@ -117,6 +117,12 @@
       <AdditionalDependencies>rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>interface.def</ModuleDefinitionFile>
     </Link>
+    <PreBuildEvent>
+      <Command>cmd /c if not exist "$(ProjectDir)stub" (mkdir "$(ProjectDir)stub")</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Create the stub directory if it doesn't exist</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -145,7 +151,7 @@
       <Command>cmd /c if not exist "$(ProjectDir)stub" (mkdir "$(ProjectDir)stub")</Command>
     </PreBuildEvent>
     <PreBuildEvent>
-      <Message>Create the stub directory</Message>
+      <Message>Create the stub directory if it doesn't exist</Message>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -163,6 +169,12 @@
       <AdditionalDependencies>rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>interface.def</ModuleDefinitionFile>
     </Link>
+    <PreBuildEvent>
+      <Command>cmd /c if not exist "$(ProjectDir)stub" (mkdir "$(ProjectDir)stub")</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Create the stub directory if it doesn't exist</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -191,7 +203,7 @@
       <Command>cmd /c if not exist "$(ProjectDir)stub" (mkdir "$(ProjectDir)stub")</Command>
     </PreBuildEvent>
     <PreBuildEvent>
-      <Message>Create the stub directory</Message>
+      <Message>Create the stub directory if it doesn't exist</Message>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
