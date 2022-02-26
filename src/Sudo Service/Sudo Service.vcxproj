@@ -117,6 +117,12 @@
       <ClientStubFile>$(SolutionDir)src\Sudo RPC Client\stub\ClientStubX86.c</ClientStubFile>
       <ServerStubFile>stub\ServerStubX86.c</ServerStubFile>
     </Midl>
+    <PreBuildEvent>
+      <Command>cmd /c if not exist "$(ProjectDir)stub" (mkdir "$(ProjectDir)stub")</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Create the stub directory if it doesn't exist</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -147,6 +153,12 @@
     <PostBuildEvent>
       <Message>Copy the target file</Message>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>cmd /c if not exist "$(ProjectDir)stub" (mkdir "$(ProjectDir)stub")</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Create the stub directory if it doesn't exist</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -167,6 +179,12 @@
       <ClientStubFile>$(SolutionDir)src\Sudo RPC Client\stub\ClientStubX64.c</ClientStubFile>
       <ServerStubFile>stub\ServerStubX64.c</ServerStubFile>
     </Midl>
+    <PreBuildEvent>
+      <Command>cmd /c if not exist "$(ProjectDir)stub" (mkdir "$(ProjectDir)stub")</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Create the stub directory if it doesn't exist</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -197,6 +215,12 @@
     <PostBuildEvent>
       <Message>Copy the target file</Message>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>cmd /c if not exist "$(ProjectDir)stub" (mkdir "$(ProjectDir)stub")</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Create the stub directory if it doesn't exist</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.c" />
