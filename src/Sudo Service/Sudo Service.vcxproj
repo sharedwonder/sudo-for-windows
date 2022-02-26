@@ -118,10 +118,10 @@
       <ServerStubFile>stub\ServerStubX86.c</ServerStubFile>
     </Midl>
     <PreBuildEvent>
-      <Command>cmd /c if not exist "$(ProjectDir)stub" (mkdir "$(ProjectDir)stub")</Command>
+      <Command>cmd /c if not exist "$(ProjectDir)stub" (mkdir "$(ProjectDir)stub") &amp; if not exist "$(SolutionDir)src\Sudo RPC Client\stub" (mkdir "$(SolutionDir)src\Sudo RPC Client\stub")</Command>
     </PreBuildEvent>
     <PreBuildEvent>
-      <Message>Create the stub directory if it doesn't exist</Message>
+      <Message>Create the stub directories if they don't exist</Message>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -154,10 +154,10 @@
       <Message>Copy the target file</Message>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>cmd /c if not exist "$(ProjectDir)stub" (mkdir "$(ProjectDir)stub")</Command>
+      <Command>cmd /c if not exist "$(ProjectDir)stub" (mkdir "$(ProjectDir)stub") &amp; if not exist "$(SolutionDir)src\Sudo RPC Client\stub" (mkdir "$(SolutionDir)src\Sudo RPC Client\stub")</Command>
     </PreBuildEvent>
     <PreBuildEvent>
-      <Message>Create the stub directory if it doesn't exist</Message>
+      <Message>Create the stub directories if they don't exist</Message>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -180,10 +180,10 @@
       <ServerStubFile>stub\ServerStubX64.c</ServerStubFile>
     </Midl>
     <PreBuildEvent>
-      <Command>cmd /c if not exist "$(ProjectDir)stub" (mkdir "$(ProjectDir)stub")</Command>
+      <Command>cmd /c if not exist "$(ProjectDir)stub" (mkdir "$(ProjectDir)stub") &amp; if not exist "$(SolutionDir)src\Sudo RPC Client\stub" (mkdir "$(SolutionDir)src\Sudo RPC Client\stub")</Command>
     </PreBuildEvent>
     <PreBuildEvent>
-      <Message>Create the stub directory if it doesn't exist</Message>
+      <Message>Create the stub directories if they don't exist</Message>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -216,10 +216,10 @@
       <Message>Copy the target file</Message>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>cmd /c if not exist "$(ProjectDir)stub" (mkdir "$(ProjectDir)stub")</Command>
+      <Command>cmd /c if not exist "$(ProjectDir)stub" (mkdir "$(ProjectDir)stub") &amp; if not exist "$(SolutionDir)src\Sudo RPC Client\stub" (mkdir "$(SolutionDir)src\Sudo RPC Client\stub")</Command>
     </PreBuildEvent>
     <PreBuildEvent>
-      <Message>Create the stub directory if it doesn't exist</Message>
+      <Message>Create the stub directories if they don't exist</Message>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

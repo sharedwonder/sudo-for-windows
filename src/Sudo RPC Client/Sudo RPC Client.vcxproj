@@ -117,12 +117,8 @@
       <AdditionalDependencies>rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>interface.def</ModuleDefinitionFile>
     </Link>
-    <PreBuildEvent>
-      <Command>cmd /c if not exist "$(ProjectDir)stub" (mkdir "$(ProjectDir)stub")</Command>
-    </PreBuildEvent>
-    <PreBuildEvent>
-      <Message>Create the stub directory if it doesn't exist</Message>
-    </PreBuildEvent>
+    <PreBuildEvent />
+    <PreBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -147,12 +143,8 @@
       <Command>cmd /c if not exist "$(SolutionDir)release\$(PlatformTarget)" (mkdir "$(SolutionDir)release\$(PlatformTarget)") &amp; copy /y "$(TargetPath)" "$(SolutionDir)release\$(PlatformTarget)\$(TargetFileName)"</Command>
       <Message>Copy the target file</Message>
     </PostBuildEvent>
-    <PreBuildEvent>
-      <Command>cmd /c if not exist "$(ProjectDir)stub" (mkdir "$(ProjectDir)stub")</Command>
-    </PreBuildEvent>
-    <PreBuildEvent>
-      <Message>Create the stub directory if it doesn't exist</Message>
-    </PreBuildEvent>
+    <PreBuildEvent />
+    <PreBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -169,12 +161,8 @@
       <AdditionalDependencies>rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>interface.def</ModuleDefinitionFile>
     </Link>
-    <PreBuildEvent>
-      <Command>cmd /c if not exist "$(ProjectDir)stub" (mkdir "$(ProjectDir)stub")</Command>
-    </PreBuildEvent>
-    <PreBuildEvent>
-      <Message>Create the stub directory if it doesn't exist</Message>
-    </PreBuildEvent>
+    <PreBuildEvent />
+    <PreBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -199,12 +187,8 @@
       <Command>cmd /c if not exist "$(SolutionDir)release\$(PlatformTarget)" (mkdir "$(SolutionDir)release\$(PlatformTarget)") &amp; copy /y "$(TargetPath)" "$(SolutionDir)release\$(PlatformTarget)\$(TargetFileName)"</Command>
       <Message>Copy the target file</Message>
     </PostBuildEvent>
-    <PreBuildEvent>
-      <Command>cmd /c if not exist "$(ProjectDir)stub" (mkdir "$(ProjectDir)stub")</Command>
-    </PreBuildEvent>
-    <PreBuildEvent>
-      <Message>Create the stub directory if it doesn't exist</Message>
-    </PreBuildEvent>
+    <PreBuildEvent />
+    <PreBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="client.c" />
