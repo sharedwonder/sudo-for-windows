@@ -17,3 +17,7 @@ lib/
 
 # Ignore Visual Studio Code folder.
 .vscode/
+
+# Ignore midl compiler generated files.
+stub/
+SudoRpcX*.h

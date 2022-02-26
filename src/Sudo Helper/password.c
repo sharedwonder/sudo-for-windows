@@ -3,7 +3,7 @@
 
 #include "password.h"
 
-_Success_(return) BOOL ReadPassword(_Out_writes_all_(PASSWORD_MAX_LENGTH + 1) LPTSTR password) {
+_Success_(return) BOOL ReadPassword(_Out_writes_z_(PASSWORD_MAX_LENGTH + 1) LPTSTR password) {
     TCHAR ch;
     size_t size = 0;
 
@@ -14,19 +14,18 @@ _Success_(return) BOOL ReadPassword(_Out_writes_all_(PASSWORD_MAX_LENGTH + 1) LP
         ch = _gettch();
 
         switch (ch) {
-        case EOF: // Ctrl+Z
-            // The operation cancelled by the user.
-            SetLastError(ERROR_CANCELLED);
-            _tprintf(TEXT("\r\n"));
-            return FALSE;
+        case TEXT('\x1a'): // Ctrl+Z
+            size = 0;
+            break;
 
-        case TEXT('\x1a'): case TEXT('\x3'): // Ctrl+C
+        case TEXT('\x3'): // Ctrl+C
             // The operation cancelled by the user.
             SetLastError(ERROR_CANCELLED);
             _tprintf(TEXT("\r\n"));
             return FALSE;
 
         case TEXT('\r'): // Press enter.
+            password[size] = '\0';
             _tprintf(TEXT("\r\n"));
             return TRUE;
 
@@ -42,7 +41,7 @@ _Success_(return) BOOL ReadPassword(_Out_writes_all_(PASSWORD_MAX_LENGTH + 1) LP
         }
 
         // The password is too long.
-        if (password[PASSWORD_MAX_LENGTH] != '\0') {
+        if (size == PASSWORD_MAX_LENGTH) {
             SetLastError(ERROR_BUFFER_OVERFLOW);
             _tprintf(TEXT("\r\n"));
             return FALSE;

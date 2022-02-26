@@ -9,8 +9,8 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="sources\RPC">
-      <UniqueIdentifier>{8897958d-e415-4851-bd03-8f3f86e3fe52}</UniqueIdentifier>
+    <Filter Include="sources\stub">
+      <UniqueIdentifier>{1392309b-9e5c-4160-a448-d68422c9fca8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -20,23 +20,29 @@
     <ClCompile Include="service.c">
       <Filter>sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\Sudo Common\RPC\ServerStubX64.c">
-      <Filter>sources\RPC</Filter>
+    <ClCompile Include="RpcAllocate.c">
+      <Filter>sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\Sudo Common\RPC\ServerStubX86.c">
-      <Filter>sources\RPC</Filter>
+    <ClCompile Include="stub\ServerStubX64.c">
+      <Filter>sources\stub</Filter>
+    </ClCompile>
+    <ClCompile Include="stub\ServerStubX86.c">
+      <Filter>sources\stub</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\service.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\SudoRpcServer.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="SudoService.acf" />
+    <None Include="SudoForWindows.acf" />
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="SudoService.idl">
+    <Midl Include="SudoForWindows.idl">
       <Filter>sources</Filter>
     </Midl>
   </ItemGroup>

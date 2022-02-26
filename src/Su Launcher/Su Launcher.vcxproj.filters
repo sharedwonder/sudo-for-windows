@@ -9,19 +9,10 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="sources\RPC">
-      <UniqueIdentifier>{cffc88ad-22d2-40d4-8709-3d3b3793cc47}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
       <Filter>sources</Filter>
-    </ClCompile>
-    <ClCompile Include="RPC\ClientStubX64.c">
-      <Filter>sources\RPC</Filter>
-    </ClCompile>
-    <ClCompile Include="RPC\ClientStubX86.c">
-      <Filter>sources\RPC</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

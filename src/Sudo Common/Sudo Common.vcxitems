@@ -18,10 +18,4 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)include\SudoRpcX64.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\SudoRpcX86.h" />
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)RPC\ClientStubX64.c" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)RPC\ClientStubX86.c" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)RPC\ServerStubX64.c" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)RPC\ServerStubX86.c" />
-  </ItemGroup>
 </Project>

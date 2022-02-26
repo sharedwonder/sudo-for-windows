@@ -2,7 +2,8 @@
 // This software is licensed under MIT License.
 
 #include "SudoFramework.h"
-#include "configuration.h"
+#include "SudoConfiguration.h"
+#include "SudoRpcClient.h"
 
 #include <signal.h>
 #include <conio.h>
@@ -27,11 +28,11 @@ int run() {
         }
     }
 
-    HANDLE (*BaseGetConsoleReferences)();
+    HANDLE (*BaseGetConsoleReference)();
     {
         HMODULE KernelBaseDLL = GetModuleHandle(TEXT("KernelBase.dll"));
         if (KernelBaseDLL != NULL) {
-            BaseGetConsoleReferences = (HANDLE (*)()) GetProcAddress(KernelBaseDLL, "BaseGetConsoleReference");
+            BaseGetConsoleReference = (HANDLE (*)()) GetProcAddress(KernelBaseDLL, "BaseGetConsoleReference");
         } else {
             return GetLastError();
         }
@@ -61,7 +62,7 @@ int run() {
     RpcTryExcept
         DWORD errorCode = LaunchElevatedProcess(
             GetCurrentProcessId(), userName, TEXT("cmd /k"),
-            (ULONG_PTR) BaseGetConsoleReferences(), environmentSize, environment,
+            (ULONG_PTR) BaseGetConsoleReference(), environmentSize, environment,
             currentDirectory, TEXT("su"), &((ULONG_PTR) process)
         );
         if (errorCode != ERROR_SUCCESS) {
@@ -89,15 +90,15 @@ int run() {
 }
 
 int _tmain(int argc, LPTSTR *argv) {
-    _TUCHAR *stringBinding;
+    /*_TUCHAR *stringBinding;
 
     RPC_STATUS status = RpcStringBindingCompose(NULL, (_TUCHAR *) TEXT("ncacn_np"), NULL,
-                                                (_TUCHAR *) TEXT("\\pipe\\SudoService"), NULL, &stringBinding);
+                                                (_TUCHAR *) TEXT("\\pipe\\SudoForWindows"), NULL, &stringBinding);
     if (status != RPC_S_OK) {
         return status;
     }
 
-    status = RpcBindingFromStringBinding(stringBinding, &RpcBindingHandle);
+    status = RpcBindingFromStringBinding(stringBinding, &SudoRpcBindingHandle);
     if (status != RPC_S_OK) {
         RpcStringFree(&stringBinding);
         return status;
@@ -106,7 +107,18 @@ int _tmain(int argc, LPTSTR *argv) {
     int exitCode = run();
 
     RpcStringFree(&stringBinding);
-    RpcBindingFree(&RpcBindingHandle);
+    RpcBindingFree(&SudoRpcBindingHandle);
 
-    return exitCode;
+    return exitCode;*/
+
+    DWORD status = SudoRpcClientInit();
+    if (status != RPC_S_OK) {
+        return status;
+    }
+
+    status = run();
+
+    SudoRpcClientFreeBinding();
+
+    return status;
 }

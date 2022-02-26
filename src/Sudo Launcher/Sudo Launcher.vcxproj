@@ -75,28 +75,28 @@
     <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\cache\</IntDir>
     <TargetName>sudo</TargetName>
-    <IncludePath>include;$(SolutionDir)src\Sudo Configuration\include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
+    <IncludePath>include;$(SolutionDir)src\Sudo Configuration\include;$(SolutionDir)src\Sudo RPC Client\include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\cache\</IntDir>
     <TargetName>sudo</TargetName>
-    <IncludePath>include;$(SolutionDir)src\Sudo Configuration\include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
+    <IncludePath>include;$(SolutionDir)src\Sudo Configuration\include;$(SolutionDir)src\Sudo RPC Client\include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <TargetName>sudo</TargetName>
     <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\cache\</IntDir>
-    <IncludePath>include;$(SolutionDir)src\Sudo Configuration\include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
+    <IncludePath>include;$(SolutionDir)src\Sudo Configuration\include;$(SolutionDir)src\Sudo RPC Client\include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\cache\</IntDir>
     <TargetName>sudo</TargetName>
-    <IncludePath>include;$(SolutionDir)src\Sudo Configuration\include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
+    <IncludePath>include;$(SolutionDir)src\Sudo Configuration\include;$(SolutionDir)src\Sudo RPC Client\include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -109,8 +109,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SudoConfiguration.lib;rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SudoConfiguration.lib;SudoRpcClient.lib;rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\;$(SolutionDir)build\Sudo RPC Client\$(Configuration)-$(PlatformTarget)\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -128,8 +128,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SudoConfiguration.lib;rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SudoConfiguration.lib;SudoRpcClient.lib;rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\;$(SolutionDir)build\Sudo RPC Client\$(Configuration)-$(PlatformTarget)\</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>cmd /c if not exist "$(SolutionDir)release\$(PlatformTarget)" (mkdir "$(SolutionDir)release\$(PlatformTarget)") &amp; copy /y "$(TargetPath)" "$(SolutionDir)release\$(PlatformTarget)\$(TargetFileName)"</Command>
@@ -149,8 +149,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SudoConfiguration.lib;rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SudoConfiguration.lib;SudoRpcClient.lib;rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\;$(SolutionDir)build\Sudo RPC Client\$(Configuration)-$(PlatformTarget)\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -168,8 +168,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SudoConfiguration.lib;rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SudoConfiguration.lib;SudoRpcClient.lib;rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\;$(SolutionDir)build\Sudo RPC Client\$(Configuration)-$(PlatformTarget)\</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>cmd /c if not exist "$(SolutionDir)release\$(PlatformTarget)" (mkdir "$(SolutionDir)release\$(PlatformTarget)") &amp; copy /y "$(TargetPath)" "$(SolutionDir)release\$(PlatformTarget)\$(TargetFileName)"</Command>
@@ -179,8 +179,6 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="RPC\ClientStubX86.c" />
-    <ClCompile Include="RPC\ClientStubX64.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

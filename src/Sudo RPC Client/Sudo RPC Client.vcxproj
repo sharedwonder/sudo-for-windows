@@ -21,32 +21,32 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{c1c432a1-ba5f-4fa9-a44f-973b71598daf}</ProjectGuid>
-    <RootNamespace>SudoService</RootNamespace>
+    <ProjectGuid>{7F2C28C8-6B95-47A8-84B0-DD443565EA35}</ProjectGuid>
+    <RootNamespace>SudoRpcClient</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -74,49 +74,49 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\cache\</IntDir>
-    <IncludePath>include;$(SolutionDir)src\Sudo Configuration\include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
-    <TargetName>SudoService</TargetName>
+    <TargetName>SudoRpcClient</TargetName>
+    <IncludePath>include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
+    <PublicIncludeDirectories>include;$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\cache\</IntDir>
-    <IncludePath>include;$(SolutionDir)src\Sudo Configuration\include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
-    <TargetName>SudoService</TargetName>
+    <TargetName>SudoRpcClient</TargetName>
+    <IncludePath>include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
+    <PublicIncludeDirectories>include;$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <TargetName>SudoService</TargetName>
     <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\cache\</IntDir>
-    <IncludePath>include;$(SolutionDir)src\Sudo Configuration\include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
+    <TargetName>SudoRpcClient</TargetName>
+    <IncludePath>include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
+    <PublicIncludeDirectories>include;$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\cache\</IntDir>
-    <IncludePath>include;$(SolutionDir)src\Sudo Configuration\include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
-    <TargetName>SudoService</TargetName>
+    <TargetName>SudoRpcClient</TargetName>
+    <IncludePath>include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
+    <PublicIncludeDirectories>include;$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;SUDORPCCLIENT_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard_C>stdc11</LanguageStandard_C>
     </ClCompile>
     <Link>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SudoConfiguration.lib;rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\</AdditionalLibraryDirectories>
+      <EnableUAC>false</EnableUAC>
+      <AdditionalDependencies>rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>interface.def</ModuleDefinitionFile>
     </Link>
-    <Midl>
-      <HeaderFileName>$(SolutionDir)src\Sudo Common\include\SudoRpcX86.h</HeaderFileName>
-      <ClientStubFile>$(SolutionDir)src\Sudo RPC Client\stub\ClientStubX86.c</ClientStubFile>
-      <ServerStubFile>stub\ServerStubX86.c</ServerStubFile>
-    </Midl>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -124,49 +124,45 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;SUDORPCCLIENT_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard_C>stdc11</LanguageStandard_C>
     </ClCompile>
     <Link>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SudoConfiguration.lib;rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\</AdditionalLibraryDirectories>
+      <EnableUAC>false</EnableUAC>
+      <AdditionalDependencies>rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>interface.def</ModuleDefinitionFile>
     </Link>
-    <Midl>
-      <HeaderFileName>$(SolutionDir)src\Sudo Common\include\SudoRpcX86.h</HeaderFileName>
-      <ClientStubFile>$(SolutionDir)src\Sudo RPC Client\stub\ClientStubX86.c</ClientStubFile>
-      <ServerStubFile>stub\ServerStubX86.c</ServerStubFile>
-    </Midl>
     <PostBuildEvent>
       <Command>cmd /c if not exist "$(SolutionDir)release\$(PlatformTarget)" (mkdir "$(SolutionDir)release\$(PlatformTarget)") &amp; copy /y "$(TargetPath)" "$(SolutionDir)release\$(PlatformTarget)\$(TargetFileName)"</Command>
-    </PostBuildEvent>
-    <PostBuildEvent>
       <Message>Copy the target file</Message>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>cmd /c if not exist "$(ProjectDir)stub" (mkdir "$(ProjectDir)stub")</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Create the stub directory</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;SUDORPCCLIENT_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard_C>stdc11</LanguageStandard_C>
     </ClCompile>
     <Link>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SudoConfiguration.lib;rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\</AdditionalLibraryDirectories>
+      <EnableUAC>false</EnableUAC>
+      <AdditionalDependencies>rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>interface.def</ModuleDefinitionFile>
     </Link>
-    <Midl>
-      <HeaderFileName>$(SolutionDir)src\Sudo Common\include\SudoRpcX64.h</HeaderFileName>
-      <ClientStubFile>$(SolutionDir)src\Sudo RPC Client\stub\ClientStubX64.c</ClientStubFile>
-      <ServerStubFile>stub\ServerStubX64.c</ServerStubFile>
-    </Midl>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -174,46 +170,48 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;SUDORPCCLIENT_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard_C>stdc11</LanguageStandard_C>
     </ClCompile>
     <Link>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SudoConfiguration.lib;rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\</AdditionalLibraryDirectories>
+      <EnableUAC>false</EnableUAC>
+      <AdditionalDependencies>rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>interface.def</ModuleDefinitionFile>
     </Link>
-    <Midl>
-      <HeaderFileName>$(SolutionDir)src\Sudo Common\include\SudoRpcX64.h</HeaderFileName>
-      <ClientStubFile>$(SolutionDir)src\Sudo RPC Client\stub\ClientStubX64.c</ClientStubFile>
-      <ServerStubFile>stub\ServerStubX64.c</ServerStubFile>
-    </Midl>
     <PostBuildEvent>
       <Command>cmd /c if not exist "$(SolutionDir)release\$(PlatformTarget)" (mkdir "$(SolutionDir)release\$(PlatformTarget)") &amp; copy /y "$(TargetPath)" "$(SolutionDir)release\$(PlatformTarget)\$(TargetFileName)"</Command>
-    </PostBuildEvent>
-    <PostBuildEvent>
       <Message>Copy the target file</Message>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>cmd /c if not exist "$(ProjectDir)stub" (mkdir "$(ProjectDir)stub")</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Create the stub directory</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.c" />
+    <ClCompile Include="client.c" />
     <ClCompile Include="RpcAllocate.c" />
-    <ClCompile Include="service.c" />
-    <ClCompile Include="stub\ServerStubX64.c" />
-    <ClCompile Include="stub\ServerStubX86.c" />
+    <ClCompile Include="stub\ClientStubX64.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="stub\ClientStubX86.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\service.h" />
-    <ClInclude Include="include\SudoRpcServer.h" />
+    <ClInclude Include="include\SudoRpcClient.h" />
+    <ClInclude Include="include\SudoRpc.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="SudoForWindows.acf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Midl Include="SudoForWindows.idl" />
+    <None Include="interface.def" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -179,7 +179,7 @@
     <ClCompile Include="dllmain.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\configuration.h" />
+    <ClInclude Include="include\SudoConfiguration.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -2,7 +2,7 @@
 // This software is licensed under MIT License.
 
 #include "SudoFramework.h"
-#include "configuration.h"
+#include "SudoConfiguration.h"
 
 SUDO_CONFIG SudoConfig;
 

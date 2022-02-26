@@ -9,18 +9,35 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
+    <Filter Include="sources\stub">
+      <UniqueIdentifier>{485d4a21-3ac6-43a1-83a8-73ce07de85b8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.c">
+    <ClCompile Include="client.c">
       <Filter>sources</Filter>
     </ClCompile>
-    <ClCompile Include="password.c">
+    <ClCompile Include="stub\ClientStubX64.c">
+      <Filter>sources\stub</Filter>
+    </ClCompile>
+    <ClCompile Include="stub\ClientStubX86.c">
+      <Filter>sources\stub</Filter>
+    </ClCompile>
+    <ClCompile Include="RpcAllocate.c">
       <Filter>sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\password.h">
+    <ClInclude Include="include\SudoRpcClient.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\SudoRpc.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="interface.def">
+      <Filter>sources</Filter>
+    </None>
   </ItemGroup>
 </Project>

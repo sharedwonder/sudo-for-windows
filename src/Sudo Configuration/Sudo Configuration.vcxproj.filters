@@ -19,7 +19,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\configuration.h">
+    <ClInclude Include="include\SudoConfiguration.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

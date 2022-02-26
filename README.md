@@ -79,4 +79,5 @@ There should be the following target files:
 - sudo.exe
 - SudoConfiguration.dll
 - SudoHelper.exe
+- SudoRpcClient.dll
 - SudoService.exe

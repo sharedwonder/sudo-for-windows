@@ -1,7 +1,7 @@
 // Copyright (c) Liu Baihao. All rights reserved.
 // This software is licensed under the MIT License.
 
-#include "configuration.h"
+#include "SudoConfiguration.h"
 
 #define DefaultValueAttemptLimit 3
 

@@ -2,7 +2,8 @@
 // This software is licensed under MIT License.
 
 #include "service.h"
-#include "configuration.h"
+#include "SudoConfiguration.h"
+#include "SudoRpcServer.h"
 
 #include <direct.h>
 #include <time.h>
@@ -11,15 +12,6 @@ static SERVICE_STATUS ServiceStatus;
 static SERVICE_STATUS_HANDLE ServiceStatusHandle;
 static HANDLE LogFileHandle;
 static TCHAR ProgramDirectory[MAX_PATH + 1] = {TEXT('\0')};
-
-_Must_inspect_result_ _Ret_maybenull_ _Post_writable_byte_size_(size)
-void __RPC_FAR *__RPC_USER midl_user_allocate(_In_ size_t size) {
-    return malloc(size);
-}
-
-void __RPC_USER midl_user_free(_Pre_maybenull_ _Post_invalid_ void __RPC_FAR *pointer) {
-    free(pointer);
-}
 
 _Success_(return) BOOL QueryTokenInformation(_In_ HANDLE token, _In_ TOKEN_INFORMATION_CLASS tokenInfoClass, _Out_opt_ LPVOID tokenInfo) {
     DWORD size;
@@ -225,29 +217,44 @@ void WriteToLogFile(LPTSTR message, enum LOG_TYPE logType) {
     WriteFile(LogFileHandle, TEXT("\r\n"), 2 * sizeof(TCHAR), NULL, NULL);
 }
 
+DWORD WINAPI SudoRpcServerRun() {
+    RPC_STATUS status = RpcServerUseProtseqEp((RPC_TSTR) TEXT("ncacn_np"), RPC_C_LISTEN_MAX_CALLS_DEFAULT,
+                                              (RPC_TSTR) TEXT("\\pipe\\SudoForWindows"), NULL);
+    if (status != RPC_S_OK) {
+        return status;
+    }
+
+    status = RpcServerRegisterIf(SudoForWindows_v0_0_s_ifspec, NULL, NULL);
+    if (status != RPC_S_OK) {
+        return status;
+    }
+
+    return RpcServerListen(1, RPC_C_LISTEN_MAX_CALLS_DEFAULT, FALSE);
+}
+
+_Success_(return == ERROR_SUCCESS) RPC_STATUS WINAPI SudoRpcServerShutdown() {
+    RPC_STATUS status;
+
+    status = RpcMgmtStopServerListening(NULL);
+    if (status != ERROR_SUCCESS) {
+        return status;
+    }
+
+    return RpcServerUnregisterIf(NULL, NULL, FALSE);
+}
+
 DWORD WINAPI ServiceRun() {
-    RPC_STATUS status = RpcServerUseProtseqEp((_TUCHAR *) TEXT("ncacn_np"), RPC_C_LISTEN_MAX_CALLS_DEFAULT,
-                                              (_TUCHAR *) TEXT("\\pipe\\SudoService"), NULL);
-    if (status != RPC_S_OK) {
-        return status;
-    }
-
-    status = RpcServerRegisterIf(SudoForWindows_v1_0_s_ifspec, NULL, NULL);
-    if (status != RPC_S_OK) {
-        return status;
-    }
-
-    status = RpcServerListen(1, RPC_C_LISTEN_MAX_CALLS_DEFAULT, FALSE);
-    return status;
+    return SudoRpcServerRun();
 }
 
 void WINAPI __callback ControlHandler(DWORD control) {
     switch (control) {
     case SERVICE_CONTROL_STOP: case SERVICE_CONTROL_SHUTDOWN:
-        LogWriteLine(TEXT("Sudo for Windows Service stopped, Exit code: 0"), LOG_INFO);
+        ServiceStatus.dwWin32ExitCode = SudoRpcServerShutdown();
+
+        LogWriteLineEx(TEXT("Sudo for Windows Service stopped, Exit code: %u"), 56, LOG_INFO, ServiceStatus.dwWin32ExitCode);
         CloseHandle(LogFileHandle);
 
-        ServiceStatus.dwWin32ExitCode = 0;
         ServiceStatus.dwCurrentState = SERVICE_STOPPED;
         SetServiceStatus(ServiceStatusHandle, &ServiceStatus);
     }

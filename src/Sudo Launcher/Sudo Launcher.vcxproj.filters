@@ -9,19 +9,10 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="sources\RPC">
-      <UniqueIdentifier>{ef133827-c673-4b81-bb5e-3d8cf9603631}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
       <Filter>sources</Filter>
-    </ClCompile>
-    <ClCompile Include="RPC\ClientStubX64.c">
-      <Filter>sources\RPC</Filter>
-    </ClCompile>
-    <ClCompile Include="RPC\ClientStubX86.c">
-      <Filter>sources\RPC</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -5,6 +5,8 @@
 
 #include "SudoFramework.h"
 
+EXTERN_C_START
+
 typedef struct SUDO_CONFIG {
     DWORD AttemptLimit;
 } SUDO_CONFIG;
@@ -26,3 +28,5 @@ SUDO_CONFIG_API _Success_(return) BOOL UnloadSudoConfig();
 SUDO_CONFIG_API _Success_(return) BOOL UpdateSudoConfig(_In_ PSUDO_CONFIG config);
 
 SUDO_CONFIG_API _Success_(return) BOOL ResetSudoConfig(_Out_ PSUDO_CONFIG config);
+
+EXTERN_C_END
