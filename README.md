@@ -6,8 +6,6 @@ This software is licensed under [MIT Lincense](LICENSE).
 
 [Latest release](https://github.com/any-possible/Sudo-for-Windows/releases/latest)
 
-This software has a extension ([Kernel API Hook](src/Kernel%20API%20Hook), [Kernel Mode Entry](src/Kernel%20Mode%20Entry), [Kernel Mode Host](src/Kernel%20Mode%20Host)). It allows the program to call the kernel API directly. But is not available now.
-
 - In the future, I will provide a way to install and uninstall automatically.
 
 ## 1.Introducing

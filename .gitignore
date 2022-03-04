@@ -12,9 +12,6 @@ build/
 # Ignore release folder.
 release/
 
-# Ignore libraries.
-lib/
-
 # Ignore Visual Studio Code folder.
 .vscode/
 
