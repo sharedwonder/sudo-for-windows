@@ -6,22 +6,32 @@
 #include "password.h"
 
 int _tmain(int argc, LPTSTR *argv) {
+    if (argc != 2) {
+        return -1;
+    }
+
     LPTSTR userName = argv[1];
-    LPTSTR launcher = argv[2];
 
     // Try to get the password of the user and create a new process.
     for (DWORD attempt = 0; attempt < SudoConfig.AttemptLimit; ++ attempt) {
-        _tprintf(TEXT("[%s] password for %s: "), launcher, userName);
         TCHAR password[PASSWORD_MAX_LENGTH + 1];
+
+        if (_tcscmp(argv[2], TETX("su")) == 0) {
+            _tprintf(TEXT("Password: "));
+        } else if (_tcscmp(argv[2], TETX("sudo")) == 0) {
+            _tprintf(TEXT("[sudo] password for %s: "), userName);
+        } else {
+            return -1;
+        }
 
         // Get the password of the user.
         if (!ReadPassword(password)) {
             if (GetLastError() == ERROR_BUFFER_OVERFLOW) { // The password is too long.
-                _ftprintf(stderr, TEXT("[%s] password too long\n"), launcher);
+                _ftprintf(stderr, TEXT("Password too long.\r\n"));
                 continue;
             } else if (GetLastError() == ERROR_CANCELLED) { // The operation cancelled by the user.
                 // Operation cancelled.
-                _ftprintf(stderr, TEXT("[%s] operation cancelled\n"), launcher);
+                _ftprintf(stderr, TEXT("Operation cancelled.\r\n"));
             }
 
             return GetLastError();
@@ -32,11 +42,11 @@ int _tmain(int argc, LPTSTR *argv) {
             ZeroMemory(password, PASSWORD_MAX_LENGTH + 1);
 
             if (GetLastError() == ERROR_LOGON_FAILURE) {
-                _ftprintf(stderr, TEXT("[%s] wrong password\n"), launcher);
+                _ftprintf(stderr, TEXT("Authentication failure.\r\n"));
                 continue;
             }
 
-            _ftprintf(stderr, TEXT("[%s] sorry, try again\n"), launcher);
+            _ftprintf(stderr, TEXT("Unknown error.\r\n"));
 
             return GetLastError();
         }

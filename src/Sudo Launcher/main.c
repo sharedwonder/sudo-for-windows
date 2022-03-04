@@ -81,7 +81,7 @@ int run(LPTSTR commandLine) {
 
 int _tmain(int argc, LPTSTR *argv) {
     if (argc == 1) {
-        _tprintf(TEXT("Usage: sudo <command-or-program> <arguments...>\n"));
+        _tprintf(TEXT("Usage: sudo <command-or-program> <arguments...>\r\n"));
         return -1;
     }
 
