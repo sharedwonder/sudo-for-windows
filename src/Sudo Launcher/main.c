@@ -81,7 +81,7 @@ int run(LPTSTR commandLine) {
 
 int _tmain(int argc, LPTSTR *argv) {
     if (argc == 1) {
-        _tprintf(TEXT("Usage: sudo <commandline...>\n"));
+        _tprintf(TEXT("Usage: sudo <command-or-program> <arguments...>\n"));
         return -1;
     }
 
@@ -121,6 +121,7 @@ int _tmain(int argc, LPTSTR *argv) {
     status = run(newCommandLine);
 
     SudoRpcClientFreeBinding();
+    free(newCommandLine);
 
     return status;
 }
