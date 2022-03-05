@@ -6,20 +6,20 @@
 #include "password.h"
 
 int _tmain(int argc, LPTSTR *argv) {
-    if (argc != 2) {
+    if (argc != 3) {
         return -1;
     }
 
-    LPTSTR userName = argv[1];
+    LPTSTR username = argv[1];
 
     // Try to get the password of the user and create a new process.
     for (DWORD attempt = 0; attempt < SudoConfig.AttemptLimit; ++ attempt) {
         TCHAR password[PASSWORD_MAX_LENGTH + 1];
 
-        if (_tcscmp(argv[2], TETX("su")) == 0) {
+        if (_tcscmp(argv[2], TEXT("su")) == 0) {
             _tprintf(TEXT("Password: "));
-        } else if (_tcscmp(argv[2], TETX("sudo")) == 0) {
-            _tprintf(TEXT("[sudo] password for %s: "), userName);
+        } else if (_tcscmp(argv[2], TEXT("sudo")) == 0) {
+            _tprintf(TEXT("[sudo] password for %s: "), username);
         } else {
             return -1;
         }
@@ -37,7 +37,7 @@ int _tmain(int argc, LPTSTR *argv) {
             return GetLastError();
         }
 
-        if (!VerifyPassword(userName, password)) {
+        if (!VerifyPassword(username, password)) {
             // For security reasons, when the password is no longer needed, fill it with zero.
             ZeroMemory(password, PASSWORD_MAX_LENGTH + 1);
 

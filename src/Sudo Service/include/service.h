@@ -5,37 +5,63 @@
 
 EXTERN_C_START
 
+#define PID_MAX_LENGTH 10
+#define EXIT_CODE_MAX_LENGTH 10
+#define ERROR_CODE_MAX_LENGTH 6
+
 // The undisclosed console reference attribute.
 #define PROC_THREAD_ATTRIBUTE_CONSOLE_REFERENCE ProcThreadAttributeValue((PROC_THREAD_ATTRIBUTE_NUM) 10, FALSE, TRUE, FALSE)
 
-enum LOG_TYPE {
-    LOG_INFO,
-    LOG_WARNING,
-    LOG_ERROR,
-    LOG_DEBUG
+/*
+ * The message types of log.
+ */
+enum LOG_MESSAGE_TYPE {
+    LOG_MESSAGE_INFO,
+    LOG_MESSAGE_WARNING,
+    LOG_MESSAGE_ERROR,
+    LOG_MESSAGE_DEBUG
 };
 
+/*!
+ * Queries token information.
+ *
+ * @param token The token to query.
+ * @param tokenInfoClass The information class to query.
+ * @param tokenInfo The answer.
+ */
 _Success_(return) BOOL QueryTokenInformation(_In_ HANDLE token, _In_ TOKEN_INFORMATION_CLASS tokenInfoClass, _Out_opt_ LPVOID tokenInfo);
 
+/*!
+ * Detects whether the token is elevated.
+ *
+ * @param token The token to detect.
+ * @return BOOL The answer.
+ */
 BOOL TokenIsElevated(_In_ HANDLE token);
 
-void WriteToLogFile(LPTSTR message, enum LOG_TYPE logType);
+DWORD LaunchElevatedProcess(DWORD clientProcessId, LPTSTR username, LPTSTR commandLine,
+                            ULONG_PTR consoleReference, DWORD environmentSize, LPTCH environment,
+                            LPTSTR workingDirectory, LPTSTR launcher, PULONG_PTR newProcess);
 
-void WINAPI __callback ControlHandler(DWORD request);
+/*!
+ * Writes a message to the log file.
+ *
+ * @param message The message to write to the log file.
+ * @param messageType The message type.
+ */
+void ServiceLog(LPTSTR message, enum LOG_MESSAGE_TYPE messageType);
 
-DWORD WINAPI ServiceRun();
+// --------------------Extended the function ServiceLog macros--------------------
 
-void WINAPI ServiceMain(DWORD argc, LPTSTR *argv);
+#define LogWriteLine(message, messageType, ...) \
+    ServiceLog((message), (messageType))
 
-#define LogWriteLine(message, logType, ...) \
-    WriteToLogFile((message), (logType))
-
-#define LogWriteLineEx(format, size, logType, ...) \
+#define LogWriteLineEx(format, size, messageType, ...) \
     { \
         LPTSTR message = (LPTSTR) malloc((size) * sizeof(TCHAR)); \
         if (message != NULL) { \
             _stprintf_s((message), (size), (format), __VA_ARGS__); \
-            WriteToLogFile((message), (logType)); \
+            ServiceLog((message), (messageType)); \
             free(message); \
         } \
     } \
@@ -43,14 +69,14 @@ void WINAPI ServiceMain(DWORD argc, LPTSTR *argv);
 
 #ifdef _DEBUG
 #define LogWriteLineDbg(message) \
-    WriteToLogFile((message), LOG_DEBUG)
+    ServiceLog((message), LOG_MESSAGE_DEBUG)
 
 #define LogWriteLineDbgEx(format, size, ...) \
     { \
         LPTSTR message = (LPTSTR) malloc(size * sizeof(TCHAR)); \
         if (message != NULL) { \
             _stprintf_s((message), (size), (format), __VA_ARGS__); \
-            WriteToLogFile((message), LOG_DEBUG); \
+            ServiceLog((message), LOG_MESSAGE_DEBUG); \
             free(message); \
         } \
     } \
@@ -59,5 +85,29 @@ void WINAPI ServiceMain(DWORD argc, LPTSTR *argv);
 #define LogWriteLineDbg(content) (void) 0
 #define LogWriteLineEbgEx(format, size, ...) (void) 0
 #endif // _DEBUG
+
+// -------------------------------------------------------------------------------
+
+/*!
+ * Handles service control requests.
+ *
+ * @param request The service control request.
+ */
+void WINAPI __callback ServiceControlHandler(DWORD request);
+
+/*!
+ * Runs the service.
+ *
+ * @return DWORD The exit code.
+ */
+DWORD WINAPI ServiceRun();
+
+/*!
+ * Sets up the service and runs the service.
+ *
+ * @param argc
+ * @param argv
+ */
+void WINAPI ServiceMain(DWORD argc, LPTSTR *argv);
 
 EXTERN_C_END

@@ -11,8 +11,16 @@
 
 EXTERN_C_START
 
+/*!
+ * Initializes the remote procedure calls client.
+ *
+ * @return DWORD The return code, if successful, returns ERROR_SUCCESS (0).
+ */
 SUDO_RPC_CLIENT_API _Success_(return == ERROR_SUCCESS) DWORD WINAPI SudoRpcClientInit();
 
+/*!
+ * Frees the binding to the server.
+ */
 SUDO_RPC_CLIENT_API void WINAPI SudoRpcClientFreeBinding();
 
 EXTERN_C_END

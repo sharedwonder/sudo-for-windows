@@ -5,8 +5,18 @@
 
 EXTERN_C_START
 
-DWORD WINAPI SudoRpcServerRun();
+/*!
+ * Listens for remote procedure calls.
+ *
+ * @return DWORD The exit code.
+ */
+DWORD WINAPI SudoRpcServerListen();
 
+/*!
+ * Stops listening for remote procedure calls.
+ *
+ * @return DWORD The return code, if successful, returns ERROR_SUCCESS (0).
+ */
 _Success_(return == ERROR_SUCCESS) RPC_STATUS WINAPI SudoRpcServerShutdown();
 
 EXTERN_C_END

@@ -6,7 +6,7 @@
 
 SUDO_CONFIG SudoConfig;
 
-BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID reserved) {
+BOOL APIENTRY DllMain(_In_ HMODULE module, _In_ DWORD reason, _In_ LPVOID reserved) {
     switch (reason) {
     case DLL_PROCESS_ATTACH:
         return LoadSudoConfig(&SudoConfig);

@@ -20,10 +20,10 @@ void __RPC_USER midl_user_free(_Pre_maybenull_ _Post_invalid_ void __RPC_FAR *po
 int run() {
     signal(SIGINT, SIG_IGN); // Disable Ctrl+C.
 
-    TCHAR userName[20];
+    TCHAR username[USERNAME_MAX_LENGTH + 1];
     {
-        DWORD size = 20;
-        if (!GetUserName(userName, &size)) {
+        DWORD size = USERNAME_MAX_LENGTH + 1;
+        if (!GetUserName(username, &size)) {
             return GetLastError();
         }
     }
@@ -61,7 +61,7 @@ int run() {
 
     RpcTryExcept
         DWORD errorCode = LaunchElevatedProcess(
-            GetCurrentProcessId(), userName, TEXT("cmd /k"),
+            GetCurrentProcessId(), username, TEXT("cmd /k"),
             (ULONG_PTR) BaseGetConsoleReference(), environmentSize, environment,
             currentDirectory, TEXT("su"), &((ULONG_PTR) process)
         );
@@ -90,27 +90,6 @@ int run() {
 }
 
 int _tmain(int argc, LPTSTR *argv) {
-    /*_TUCHAR *stringBinding;
-
-    RPC_STATUS status = RpcStringBindingCompose(NULL, (_TUCHAR *) TEXT("ncacn_np"), NULL,
-                                                (_TUCHAR *) TEXT("\\pipe\\SudoForWindows"), NULL, &stringBinding);
-    if (status != RPC_S_OK) {
-        return status;
-    }
-
-    status = RpcBindingFromStringBinding(stringBinding, &SudoRpcBindingHandle);
-    if (status != RPC_S_OK) {
-        RpcStringFree(&stringBinding);
-        return status;
-    }
-
-    int exitCode = run();
-
-    RpcStringFree(&stringBinding);
-    RpcBindingFree(&SudoRpcBindingHandle);
-
-    return exitCode;*/
-
     DWORD status = SudoRpcClientInit();
     if (status != RPC_S_OK) {
         return status;

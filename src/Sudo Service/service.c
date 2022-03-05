@@ -29,19 +29,21 @@ BOOL TokenIsElevated(_In_ HANDLE token) {
     return tokenElevation.TokenIsElevated;
 }
 
-DWORD LaunchElevatedProcess(DWORD clientProcessId, LPTSTR userName, LPTSTR commandLine,
+DWORD LaunchElevatedProcess(DWORD clientProcessId, LPTSTR username, LPTSTR commandLine,
                             ULONG_PTR consoleReference, DWORD environmentSize, LPTCH environment,
                             LPTSTR workingDirectory, LPTSTR launcher, PULONG_PTR newProcess) {
     // Unused parameters.
     UNREFERENCED_PARAMETER(environmentSize);
 
-    LogWriteLineEx(TEXT("New elevating permissions request, client process ID: %u, user: %s"), 93,
-                   LOG_INFO, clientProcessId, userName);
+    LogWriteLineEx(TEXT("New elevating permissions request, client process ID: %u, user: %s"),
+                   PID_MAX_LENGTH + USERNAME_MAX_LENGTH + 63,
+                   LOG_MESSAGE_INFO, clientProcessId, username);
 
     HANDLE clientProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, clientProcessId);
     if (clientProcess == INVALID_HANDLE_VALUE) {
-        LogWriteLineEx(TEXT("Failed to elevated permission, client process ID: %u, user: %s, error code: %u"), 109,
-                       LOG_INFO, clientProcessId, userName, GetLastError());
+        LogWriteLineEx(TEXT("Failed to elevated permission, client process ID: %u, user: %s, error code: %u"),
+                       PID_MAX_LENGTH + USERNAME_MAX_LENGTH + ERROR_CODE_MAX_LENGTH + 73,
+                       LOG_MESSAGE_INFO, clientProcessId, username, GetLastError());
         return GetLastError();
     }
 
@@ -86,9 +88,9 @@ DWORD LaunchElevatedProcess(DWORD clientProcessId, LPTSTR userName, LPTSTR comma
     if (!TokenIsElevated(clientToken)) {
         // Launch the helper program to authentication the request.
 
-        TCHAR helperCommandLine[MAX_PATH + 27];
+        TCHAR helperCommandLine[MAX_PATH + 2 + USERNAME_MAX_LENGTH + 2 + 4 + 1];
         _stprintf_s(helperCommandLine, sizeof(helperCommandLine) / sizeof(TCHAR),
-                    TEXT("\"%sSudoHelper.exe\" %s %s"), ProgramDirectory, userName, launcher);
+                    TEXT("\"%sSudoHelper.exe\" \"%s\" %s"), ProgramDirectory, username, launcher);
 
         HANDLE newToken;
         {
@@ -137,6 +139,7 @@ DWORD LaunchElevatedProcess(DWORD clientProcessId, LPTSTR userName, LPTSTR comma
         CloseHandle(helperProcessInfo.hProcess);
         CloseHandle(helperProcessInfo.hThread);
         if (errorCode != EXIT_SUCCESS) {
+            SetLastError(errorCode);
             goto Failed;
         }
 
@@ -170,13 +173,15 @@ DWORD LaunchElevatedProcess(DWORD clientProcessId, LPTSTR userName, LPTSTR comma
 
     CloseHandle(clientProcess);
 
-    LogWriteLineEx(TEXT("Elevated permission successfully, client process ID: %u, user: %s"), 92,
-                   LOG_INFO, clientProcessId, userName);
+    LogWriteLineEx(TEXT("Elevated permission successfully, client process ID: %u, user: %s"),
+                   PID_MAX_LENGTH + USERNAME_MAX_LENGTH + 62,
+                   LOG_MESSAGE_INFO, clientProcessId, username);
     return ERROR_SUCCESS;
 
 Failed:
-    LogWriteLineEx(TEXT("Failed to elevated permission, client process ID: %u, user: %s, error code: %u"), 109,
-                   LOG_INFO, clientProcessId, userName, GetLastError());
+    LogWriteLineEx(TEXT("Failed to elevated permission, client process ID: %u, user: %s, error code: %u"),
+                   PID_MAX_LENGTH + USERNAME_MAX_LENGTH + ERROR_CODE_MAX_LENGTH + 73,
+                   LOG_MESSAGE_INFO, clientProcessId, username, GetLastError());
 
     CloseHandle(clientProcess);
     free(startupInfoEx.lpAttributeList);
@@ -184,45 +189,7 @@ Failed:
     return GetLastError();
 }
 
-void WriteToLogFile(LPTSTR message, enum LOG_TYPE logType) {
-    TCHAR formattedTime[128];
-    DWORD formattedTimeSize;
-
-    // Get the formatted time.
-    {
-        time_t nowTime;
-        struct tm timeStruct;
-
-        time(&nowTime);
-        localtime_s(&timeStruct, &nowTime);
-        formattedTimeSize = (DWORD) _tcsftime(formattedTime, 128, TEXT("[%Y-%m-%d %H:%M:%S] "), &timeStruct);
-    }
-
-    WriteFile(LogFileHandle, formattedTime, formattedTimeSize * sizeof(TCHAR), NULL, NULL);
-
-    switch (logType) {
-    case LOG_INFO:
-        WriteFile(LogFileHandle, TEXT("INFO    "), 8 * sizeof(TCHAR), NULL, NULL);
-        break;
-
-    case LOG_WARNING:
-        WriteFile(LogFileHandle, TEXT("WARNING "), 8 * sizeof(TCHAR), NULL, NULL);
-        break;
-
-    case LOG_ERROR:
-        WriteFile(LogFileHandle, TEXT("ERROR   "), 8 * sizeof(TCHAR), NULL, NULL);
-        break;
-
-    case LOG_DEBUG:
-        WriteFile(LogFileHandle, TEXT("DEBUG   "), 8 * sizeof(TCHAR), NULL, NULL);
-        break;
-    }
-
-    WriteFile(LogFileHandle, message, ((DWORD) _tcslen(message)) * sizeof(TCHAR), NULL, NULL);
-    WriteFile(LogFileHandle, TEXT("\r\n"), 2 * sizeof(TCHAR), NULL, NULL);
-}
-
-DWORD WINAPI SudoRpcServerRun() {
+DWORD WINAPI SudoRpcServerListen() {
     RPC_STATUS status = RpcServerUseProtseqEp((RPC_TSTR) TEXT("ncacn_np"), RPC_C_LISTEN_MAX_CALLS_DEFAULT,
                                               (RPC_TSTR) TEXT("\\pipe\\SudoForWindows"), NULL);
     if (status != RPC_S_OK) {
@@ -248,21 +215,60 @@ _Success_(return == ERROR_SUCCESS) RPC_STATUS WINAPI SudoRpcServerShutdown() {
     return RpcServerUnregisterIf(NULL, NULL, FALSE);
 }
 
-DWORD WINAPI ServiceRun() {
-    return SudoRpcServerRun();
+void ServiceLog(LPTSTR message, enum LOG_MESSAGE_TYPE messageType) {
+    TCHAR formattedTime[128];
+    DWORD formattedTimeSize;
+
+    // Get the formatted time.
+    {
+        time_t nowTime;
+        struct tm timeStruct;
+
+        time(&nowTime);
+        localtime_s(&timeStruct, &nowTime);
+        formattedTimeSize = (DWORD) _tcsftime(formattedTime, 128, TEXT("[%Y-%m-%d %H:%M:%S] "), &timeStruct);
+    }
+
+    WriteFile(LogFileHandle, formattedTime, formattedTimeSize * sizeof(TCHAR), NULL, NULL);
+
+    switch (messageType) {
+    case LOG_MESSAGE_INFO:
+        WriteFile(LogFileHandle, TEXT("INFO    "), 8 * sizeof(TCHAR), NULL, NULL);
+        break;
+
+    case LOG_MESSAGE_WARNING:
+        WriteFile(LogFileHandle, TEXT("WARNING "), 8 * sizeof(TCHAR), NULL, NULL);
+        break;
+
+    case LOG_MESSAGE_ERROR:
+        WriteFile(LogFileHandle, TEXT("ERROR   "), 8 * sizeof(TCHAR), NULL, NULL);
+        break;
+
+    case LOG_MESSAGE_DEBUG:
+        WriteFile(LogFileHandle, TEXT("DEBUG   "), 8 * sizeof(TCHAR), NULL, NULL);
+        break;
+    }
+
+    WriteFile(LogFileHandle, message, ((DWORD) _tcslen(message)) * sizeof(TCHAR), NULL, NULL);
+    WriteFile(LogFileHandle, TEXT("\r\n"), 2 * sizeof(TCHAR), NULL, NULL);
 }
 
-void WINAPI __callback ControlHandler(DWORD control) {
+void WINAPI __callback ServiceControlHandler(DWORD control) {
     switch (control) {
     case SERVICE_CONTROL_STOP: case SERVICE_CONTROL_SHUTDOWN:
         ServiceStatus.dwWin32ExitCode = SudoRpcServerShutdown();
 
-        LogWriteLineEx(TEXT("Sudo for Windows Service stopped, Exit code: %u"), 56, LOG_INFO, ServiceStatus.dwWin32ExitCode);
+        LogWriteLineEx(TEXT("Sudo for Windows Service stopped, Exit code: %u"),
+                       EXIT_CODE_MAX_LENGTH + 46, LOG_MESSAGE_INFO, ServiceStatus.dwWin32ExitCode);
         CloseHandle(LogFileHandle);
 
         ServiceStatus.dwCurrentState = SERVICE_STOPPED;
         SetServiceStatus(ServiceStatusHandle, &ServiceStatus);
     }
+}
+
+DWORD WINAPI ServiceRun() {
+    return SudoRpcServerListen();
 }
 
 void WINAPI ServiceMain(DWORD argc, LPTSTR *argv) {
@@ -277,7 +283,7 @@ void WINAPI ServiceMain(DWORD argc, LPTSTR *argv) {
     ServiceStatus.dwServiceSpecificExitCode = 0;
     ServiceStatus.dwCheckPoint = 0;
     ServiceStatus.dwWaitHint = 0;
-    ServiceStatusHandle = RegisterServiceCtrlHandler(TEXT("SudoService"), ControlHandler);
+    ServiceStatusHandle = RegisterServiceCtrlHandler(TEXT("SudoService"), ServiceControlHandler);
 
     // Open the log file.
     {
@@ -332,21 +338,23 @@ void WINAPI ServiceMain(DWORD argc, LPTSTR *argv) {
     }
 
     if (ServiceStatusHandle == NULL) {
-        LogWriteLineEx(TEXT("Failed to start Sudo for Windows Service. Error code: %u."), 60, LOG_ERROR, GetLastError());
+        LogWriteLineEx(TEXT("Failed to start Sudo for Windows Service. Error code: %u."),
+                       ERROR_CODE_MAX_LENGTH + 56, LOG_MESSAGE_ERROR, GetLastError());
         return;
     }
 
     ServiceStatus.dwCurrentState = SERVICE_RUNNING;
     SetServiceStatus(ServiceStatusHandle, &ServiceStatus);
 
-    LogWriteLine(TEXT("Sudo for Windows Service started successfully."), LOG_INFO);
+    LogWriteLine(TEXT("Sudo for Windows Service started successfully."), LOG_MESSAGE_INFO);
 
     GetModuleFileName(NULL, ProgramDirectory, MAX_PATH);
     _tcsrchr(ProgramDirectory, TEXT('\\'))[1] = '\0';
 
     ServiceStatus.dwWin32ExitCode = ServiceRun();
 
-    LogWriteLineEx(TEXT("Sudo for Windows Service stopped. Exit code: %d"), 56, LOG_INFO, ServiceStatus.dwWin32ExitCode);
+    LogWriteLineEx(TEXT("Sudo for Windows Service stopped. Exit code: %d"),
+                   EXIT_CODE_MAX_LENGTH + 46, LOG_MESSAGE_INFO, ServiceStatus.dwWin32ExitCode);
     CloseHandle(LogFileHandle);
 
     ServiceStatus.dwCurrentState = SERVICE_STOPPED;

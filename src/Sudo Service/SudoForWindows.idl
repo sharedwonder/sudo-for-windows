@@ -8,7 +8,7 @@ typedef TCHAR *LPTCH;
 
 [uuid(3e1b3656-1948-43c6-95fe-482b3c4d0138)]
 interface SudoForWindows {
-    DWORD LaunchElevatedProcess([in] DWORD clientProcessId, [in, string] LPTSTR userName, [in, string] LPTSTR commandLine,
+    DWORD LaunchElevatedProcess([in] DWORD clientProcessId, [in, string] LPTSTR username, [in, string] LPTSTR commandLine,
                                 [in] ULONG_PTR consoleReference, [in] DWORD environmentSize,
                                 [in, size_is(environmentSize * sizeof(TCHAR)), length_is(environmentSize)] LPTCH environment,
                                 [in, string] LPTSTR workingDirectory, [in, string] LPTSTR launcher, [out] PULONG_PTR newProcess);

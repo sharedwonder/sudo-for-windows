@@ -10,10 +10,10 @@
 int run(LPTSTR commandLine) {
     signal(SIGINT, SIG_IGN); // Disable Ctrl+C.
 
-    TCHAR userName[20];
+    TCHAR username[20];
     {
         DWORD size = 20;
-        if (!GetUserName(userName, &size)) {
+        if (!GetUserName(username, &size)) {
             return GetLastError();
         }
     }
@@ -51,7 +51,7 @@ int run(LPTSTR commandLine) {
 
     RpcTryExcept
         DWORD errorCode = LaunchElevatedProcess(
-            GetCurrentProcessId(), userName, commandLine,
+            GetCurrentProcessId(), username, commandLine,
             (ULONG_PTR) BaseGetConsoleReference(), environmentSize, environment,
             currentDirectory, TEXT("sudo"), &((ULONG_PTR) process)
         );

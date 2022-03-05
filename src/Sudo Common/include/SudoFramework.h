@@ -24,3 +24,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+
+// The maximum length of username in Windows.
+#define USERNAME_MAX_LENGTH 20
