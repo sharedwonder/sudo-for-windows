@@ -53,37 +53,37 @@ void ServiceLog(LPTSTR message, enum LOG_MESSAGE_TYPE messageType);
 
 // --------------------Extended the function ServiceLog macros--------------------
 
-#define LogWriteLine(message, messageType, ...) \
+#define WriteLog(message, messageType, ...) \
     ServiceLog((message), (messageType))
 
-#define LogWriteLineEx(format, size, messageType, ...) \
+#define WriteLogEx(format, size, messageType, ...) \
     { \
-        LPTSTR message = (LPTSTR) malloc((size) * sizeof(TCHAR)); \
-        if (message != NULL) { \
-            _stprintf_s((message), (size), (format), __VA_ARGS__); \
-            ServiceLog((message), (messageType)); \
-            free(message); \
+        LPTSTR _MESSAGE = (LPTSTR) malloc((size) * sizeof(TCHAR)); \
+        if (_MESSAGE != NULL) { \
+            _stprintf_s(_MESSAGE, (size), (format), __VA_ARGS__); \
+            ServiceLog(_MESSAGE, (messageType)); \
+            free(_MESSAGE); \
         } \
     } \
     (void) 0
 
 #ifdef _DEBUG
-#define LogWriteLineDbg(message) \
+#define WriteLogEbg(message) \
     ServiceLog((message), LOG_MESSAGE_DEBUG)
 
-#define LogWriteLineDbgEx(format, size, ...) \
+#define WriteLogEbgEx(format, size, ...) \
     { \
-        LPTSTR message = (LPTSTR) malloc(size * sizeof(TCHAR)); \
-        if (message != NULL) { \
-            _stprintf_s((message), (size), (format), __VA_ARGS__); \
-            ServiceLog((message), LOG_MESSAGE_DEBUG); \
-            free(message); \
+        LPTSTR __MESSAGE = (LPTSTR) malloc(size * sizeof(TCHAR)); \
+        if (__MESSAGE != NULL) { \
+            _stprintf_s(__MESSAGE, (size), (format), __VA_ARGS__); \
+            ServiceLog(__MESSAGE, LOG_MESSAGE_DEBUG); \
+            free(__MESSAGE); \
         } \
     } \
     (void) 0
 #else
-#define LogWriteLineDbg(content) (void) 0
-#define LogWriteLineEbgEx(format, size, ...) (void) 0
+#define WriteLogDbg(content) (void) 0
+#define WriteLogEbgEx(format, size, ...) (void) 0
 #endif // _DEBUG
 
 // -------------------------------------------------------------------------------

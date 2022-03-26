@@ -35,16 +35,15 @@ DWORD LaunchElevatedProcess(DWORD clientProcessId, LPTSTR username, LPTSTR comma
     // Unused parameters.
     UNREFERENCED_PARAMETER(environmentSize);
 
-    LogWriteLineEx(TEXT("New elevating permissions request, client process ID: %u, user: %s"),
-                   PID_MAX_LENGTH + USERNAME_MAX_LENGTH + 63,
-                   LOG_MESSAGE_INFO, clientProcessId, username);
+    WriteLogEx(TEXT("New elevating permissions request:\r\n"
+                    "\tClient process ID: %u\r\n"
+                    "\tUser: %s"),
+               PID_MAX_LENGTH + USERNAME_MAX_LENGTH + 64,
+               LOG_MESSAGE_INFO, clientProcessId, username);
 
     HANDLE clientProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, clientProcessId);
     if (clientProcess == INVALID_HANDLE_VALUE) {
-        LogWriteLineEx(TEXT("Failed to elevated permission, client process ID: %u, user: %s, error code: %u"),
-                       PID_MAX_LENGTH + USERNAME_MAX_LENGTH + ERROR_CODE_MAX_LENGTH + 73,
-                       LOG_MESSAGE_INFO, clientProcessId, username, GetLastError());
-        return GetLastError();
+        goto InitFailed;
     }
 
     // Using to set the new process attributes.
@@ -173,18 +172,33 @@ DWORD LaunchElevatedProcess(DWORD clientProcessId, LPTSTR username, LPTSTR comma
 
     CloseHandle(clientProcess);
 
-    LogWriteLineEx(TEXT("Elevated permission successfully, client process ID: %u, user: %s"),
-                   PID_MAX_LENGTH + USERNAME_MAX_LENGTH + 62,
-                   LOG_MESSAGE_INFO, clientProcessId, username);
+    WriteLogEx(TEXT("Elevated permission successfully:\r\n"
+                    "\tClient process ID: %u\r\n"
+                    "\tUser: %s"),
+               PID_MAX_LENGTH + USERNAME_MAX_LENGTH + 63,
+               LOG_MESSAGE_INFO, clientProcessId, username);
     return ERROR_SUCCESS;
 
 Failed:
-    LogWriteLineEx(TEXT("Failed to elevated permission, client process ID: %u, user: %s, error code: %u"),
-                   PID_MAX_LENGTH + USERNAME_MAX_LENGTH + ERROR_CODE_MAX_LENGTH + 73,
-                   LOG_MESSAGE_INFO, clientProcessId, username, GetLastError());
-
     CloseHandle(clientProcess);
     free(startupInfoEx.lpAttributeList);
+
+InitFailed:
+    LPTSTR message;
+    FormatMessage(FORMAT_MESSAGE_IGNORE_INSERTS | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_ALLOCATE_BUFFER,
+                  NULL, GetLastError(), LANG_USER_DEFAULT, (LPTSTR) &message, 0, NULL);
+    size_t messageSize = _tcslen(message);
+    message[messageSize -= 2] = '\0';
+
+    WriteLogEx(TEXT("Failed to elevated permission:\r\n"
+                    "\tClient process ID: %u\r\n"
+                    "\tUser: %s\r\n"
+                    "\tError code: %u\r\n"
+                    "\tError message: %s"),
+               PID_MAX_LENGTH + USERNAME_MAX_LENGTH + ERROR_CODE_MAX_LENGTH + 92 + messageSize,
+               LOG_MESSAGE_INFO, clientProcessId, username, GetLastError(), message);
+
+    LocalFree(message);
 
     return GetLastError();
 }
@@ -233,19 +247,19 @@ void ServiceLog(LPTSTR message, enum LOG_MESSAGE_TYPE messageType) {
 
     switch (messageType) {
     case LOG_MESSAGE_INFO:
-        WriteFile(LogFileHandle, TEXT("INFO    "), 8 * sizeof(TCHAR), NULL, NULL);
+        WriteFile(LogFileHandle, TEXT("\tINFO\t"), 6 * sizeof(TCHAR), NULL, NULL);
         break;
 
     case LOG_MESSAGE_WARNING:
-        WriteFile(LogFileHandle, TEXT("WARNING "), 8 * sizeof(TCHAR), NULL, NULL);
+        WriteFile(LogFileHandle, TEXT("\tWARNING\t"), 9 * sizeof(TCHAR), NULL, NULL);
         break;
 
     case LOG_MESSAGE_ERROR:
-        WriteFile(LogFileHandle, TEXT("ERROR   "), 8 * sizeof(TCHAR), NULL, NULL);
+        WriteFile(LogFileHandle, TEXT("\tERROR\t"), 7 * sizeof(TCHAR), NULL, NULL);
         break;
 
     case LOG_MESSAGE_DEBUG:
-        WriteFile(LogFileHandle, TEXT("DEBUG   "), 8 * sizeof(TCHAR), NULL, NULL);
+        WriteFile(LogFileHandle, TEXT("\tDEBUG\t"), 7 * sizeof(TCHAR), NULL, NULL);
         break;
     }
 
@@ -258,8 +272,8 @@ void WINAPI __callback ServiceControlHandler(DWORD control) {
     case SERVICE_CONTROL_STOP: case SERVICE_CONTROL_SHUTDOWN:
         ServiceStatus.dwWin32ExitCode = SudoRpcServerShutdown();
 
-        LogWriteLineEx(TEXT("Sudo for Windows Service stopped, Exit code: %u"),
-                       EXIT_CODE_MAX_LENGTH + 46, LOG_MESSAGE_INFO, ServiceStatus.dwWin32ExitCode);
+        WriteLogEx(TEXT("Sudo for Windows Service stopped, Exit code: %u"),
+                   EXIT_CODE_MAX_LENGTH + 46, LOG_MESSAGE_INFO, ServiceStatus.dwWin32ExitCode);
         CloseHandle(LogFileHandle);
 
         ServiceStatus.dwCurrentState = SERVICE_STOPPED;
@@ -338,23 +352,23 @@ void WINAPI ServiceMain(DWORD argc, LPTSTR *argv) {
     }
 
     if (ServiceStatusHandle == NULL) {
-        LogWriteLineEx(TEXT("Failed to start Sudo for Windows Service. Error code: %u."),
-                       ERROR_CODE_MAX_LENGTH + 56, LOG_MESSAGE_ERROR, GetLastError());
+        WriteLogEx(TEXT("Failed to start Sudo for Windows Service. Error code: %u."),
+                   ERROR_CODE_MAX_LENGTH + 56, LOG_MESSAGE_ERROR, GetLastError());
         return;
     }
 
     ServiceStatus.dwCurrentState = SERVICE_RUNNING;
     SetServiceStatus(ServiceStatusHandle, &ServiceStatus);
 
-    LogWriteLine(TEXT("Sudo for Windows Service started successfully."), LOG_MESSAGE_INFO);
+    WriteLog(TEXT("Sudo for Windows Service started successfully."), LOG_MESSAGE_INFO);
 
     GetModuleFileName(NULL, ProgramDirectory, MAX_PATH);
     _tcsrchr(ProgramDirectory, TEXT('\\'))[1] = '\0';
 
     ServiceStatus.dwWin32ExitCode = ServiceRun();
 
-    LogWriteLineEx(TEXT("Sudo for Windows Service stopped. Exit code: %d"),
-                   EXIT_CODE_MAX_LENGTH + 46, LOG_MESSAGE_INFO, ServiceStatus.dwWin32ExitCode);
+    WriteLogEx(TEXT("Sudo for Windows Service stopped. Exit code: %d"),
+               EXIT_CODE_MAX_LENGTH + 46, LOG_MESSAGE_INFO, ServiceStatus.dwWin32ExitCode);
     CloseHandle(LogFileHandle);
 
     ServiceStatus.dwCurrentState = SERVICE_STOPPED;
