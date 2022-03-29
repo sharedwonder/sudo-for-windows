@@ -60,7 +60,7 @@ At last, remove the directory where the software is stored.
 
 Environment:
 
-- **[Microsoft Visual Studio 2019](https://aka.ms/vs)** or more *with* **Microsoft Visual C++ Build Tools v142** or more
+- **[Microsoft Visual Studio 2019](https://aka.ms/vs)** or later *with* **Microsoft Visual C++ Build Tools v142** or later
 
 Commands:
 

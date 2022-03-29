@@ -5,14 +5,11 @@
 
 /*
  * In the C language, when you include the header file "windows.h",
- * if the macro MICROSOFT_WINDOWS_WINBASE_H_DEFINE_INTERLOCKED_CPLUSPLUS_OVERLOADS
- * is not defined as 0, it will display the warning C5105 in compiling.
- * And the code segment associated with the macro is compiled in the C++ language.
- * So you don't have to worry about what errors or warnings will cause.
- * In C++ language, you don't need to do this.
+ * and if the macro MICROSOFT_WINDOWS_WINBASE_H_DEFINE_INTERLOCKED_CPLUSPLUS_OVERLOADS
+ * is not defined as 0, the compiler will display the warning C5105 in compiling.
+ * But don't need to do this in C++ language.
  *
- * This problem appears in the Windows SDK 10.0.19041 and 10.0.22000 versions,
- * and I don't know if there will be a problem in other versions.
+ * This problem appears in the Windows SDK 10.0.19041 and later.
  * I tried to reinstall the Windows SDK, but it didn't have any effect.
  */
 #ifndef __cplusplus
