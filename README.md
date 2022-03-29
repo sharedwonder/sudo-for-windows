@@ -67,8 +67,10 @@ Commands:
 ```powershell
 git clone https://github.com/sharedwonder/Sudo-for-Windows.git
 cd Sudo-for-Windows
-msbuild "Sudo for Windows.sln" -property:Configuration=Release -property:Platform=x64 # or "x86" if you want
+msbuild "Sudo for Windows.sln" -property:Configuration=Release -property:Platform=x64
 ```
+
+- If you want to build a 32-bit version, just replace "x64" with "x86" (Unsupported arm or arm64).
 
 Then you can see the target files in the directory "release\\x64" (or "release\\x86" if building with Platform=x86).
 There should be the following target files:
