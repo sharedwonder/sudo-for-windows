@@ -36,9 +36,9 @@ DWORD LaunchElevatedProcess(DWORD clientProcessId, LPTSTR username, LPTSTR comma
     UNREFERENCED_PARAMETER(environmentSize);
 
     WriteLogEx(TEXT("New elevating permissions request:\r\n"
-                    "\tClient process ID: %u\r\n"
-                    "\tUser: %s"),
-               PID_MAX_LENGTH + USERNAME_MAX_LENGTH + 64,
+                    "Client process ID: %u\r\n"
+                    "User: %s"),
+               PID_MAX_LENGTH + USERNAME_MAX_LENGTH + 62,
                LOG_MESSAGE_INFO, clientProcessId, username);
 
     HANDLE clientProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, clientProcessId);
@@ -173,9 +173,9 @@ DWORD LaunchElevatedProcess(DWORD clientProcessId, LPTSTR username, LPTSTR comma
     CloseHandle(clientProcess);
 
     WriteLogEx(TEXT("Elevated permission successfully:\r\n"
-                    "\tClient process ID: %u\r\n"
-                    "\tUser: %s"),
-               PID_MAX_LENGTH + USERNAME_MAX_LENGTH + 63,
+                    "Client process ID: %u\r\n"
+                    "User: %s"),
+               PID_MAX_LENGTH + USERNAME_MAX_LENGTH + 61,
                LOG_MESSAGE_INFO, clientProcessId, username);
     return ERROR_SUCCESS;
 
@@ -191,11 +191,11 @@ InitFailed:
     message[messageSize -= 2] = '\0';
 
     WriteLogEx(TEXT("Failed to elevated permission:\r\n"
-                    "\tClient process ID: %u\r\n"
-                    "\tUser: %s\r\n"
-                    "\tError code: %u\r\n"
-                    "\tError message: %s"),
-               PID_MAX_LENGTH + USERNAME_MAX_LENGTH + ERROR_CODE_MAX_LENGTH + 92 + messageSize,
+                    "Client process ID: %u\r\n"
+                    "User: %s\r\n"
+                    "Error code: %u\r\n"
+                    "Error message: %s"),
+               PID_MAX_LENGTH + USERNAME_MAX_LENGTH + ERROR_CODE_MAX_LENGTH + 88 + messageSize,
                LOG_MESSAGE_INFO, clientProcessId, username, GetLastError(), message);
 
     LocalFree(message);
