@@ -61,6 +61,7 @@ At last, remove the directory where the software is stored.
 Environment:
 
 - **[Microsoft Visual Studio 2019](https://aka.ms/vs)** or later *with* **Microsoft Visual C++ Build Tools v142** or later
+- Microsoft Windows SDK 10 or later
 
 Commands:
 
