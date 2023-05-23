@@ -327,8 +327,11 @@ void WINAPI ServiceMain(DWORD argc, LPTSTR *argv) {
             }
 
             // Set the file encoding to UTF-16.
+        #ifdef UNICODE
+            // Set the file encoding to Unicode (UTF-16).
             WORD header = 0xfeff;
             WriteFile(LogFileHandle, &header, sizeof(WORD), NULL, NULL);
+        #endif // UNICODE
         } else {
             // The log file is already existing.
             LogFileHandle = CreateFile(logFile, GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ,
@@ -338,6 +341,7 @@ void WINAPI ServiceMain(DWORD argc, LPTSTR *argv) {
                 return;
             }
 
+        #ifdef UNICODE
             WORD header = 0;
             if (!ReadFile(LogFileHandle, &header, sizeof(WORD), NULL, NULL)) {
                 return;
@@ -348,6 +352,8 @@ void WINAPI ServiceMain(DWORD argc, LPTSTR *argv) {
                 header = 0xfeff;
                 WriteFile(LogFileHandle, &header, sizeof(WORD), NULL, NULL);
             }
+        #endif // UNICODE
+
             // Move the pointer to the end of the log file.
             SetFilePointer(LogFileHandle, 0, NULL, FILE_END);
         }
