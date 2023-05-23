@@ -35,10 +35,10 @@ DWORD LaunchElevatedProcess(DWORD clientProcessId, LPTSTR username, LPTSTR comma
     // Unused parameters.
     UNREFERENCED_PARAMETER(environmentSize);
 
-    WriteLogEx(TEXT("New elevating permissions request:\r\n"
+    WriteLogEx(TEXT("New elevating request:\r\n"
                     "Client process ID: %u\r\n"
                     "User: %s"),
-               PID_MAX_LENGTH + USERNAME_MAX_LENGTH + 62,
+               PID_MAX_LENGTH + USERNAME_MAX_LENGTH + 50,
                LOG_MESSAGE_INFO, clientProcessId, username);
 
     HANDLE clientProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, clientProcessId);
@@ -164,18 +164,20 @@ DWORD LaunchElevatedProcess(DWORD clientProcessId, LPTSTR username, LPTSTR comma
 
     if (!DuplicateHandle(GetCurrentProcess(), processInfo.hProcess, clientProcess,
                          (PHANDLE) newProcess, 0, FALSE, DUPLICATE_SAME_ACCESS)) {
+        CloseHandle(processInfo.hProcess);
+        CloseHandle(processInfo.hThread);
         goto Failed;
     }
 
     CloseHandle(processInfo.hProcess);
     CloseHandle(processInfo.hThread);
-
     CloseHandle(clientProcess);
+    free(startupInfoEx.lpAttributeList);
 
-    WriteLogEx(TEXT("Elevated permission successfully:\r\n"
+    WriteLogEx(TEXT("Elevated successfully:\r\n"
                     "Client process ID: %u\r\n"
                     "User: %s"),
-               PID_MAX_LENGTH + USERNAME_MAX_LENGTH + 61,
+               PID_MAX_LENGTH + USERNAME_MAX_LENGTH + 50,
                LOG_MESSAGE_INFO, clientProcessId, username);
     return ERROR_SUCCESS;
 
@@ -190,12 +192,12 @@ InitFailed:
     size_t messageSize = _tcslen(message);
     message[messageSize -= 2] = '\0';
 
-    WriteLogEx(TEXT("Failed to elevated permission:\r\n"
+    WriteLogEx(TEXT("Failed to elevate:\r\n"
                     "Client process ID: %u\r\n"
                     "User: %s\r\n"
                     "Error code: %u\r\n"
                     "Error message: %s"),
-               PID_MAX_LENGTH + USERNAME_MAX_LENGTH + ERROR_CODE_MAX_LENGTH + 88 + messageSize,
+               PID_MAX_LENGTH + USERNAME_MAX_LENGTH + ERROR_CODE_MAX_LENGTH + 76 + messageSize,
                LOG_MESSAGE_INFO, clientProcessId, username, GetLastError(), message);
 
     LocalFree(message);
@@ -272,7 +274,7 @@ void WINAPI __callback ServiceControlHandler(DWORD control) {
     case SERVICE_CONTROL_STOP: case SERVICE_CONTROL_SHUTDOWN:
         ServiceStatus.dwWin32ExitCode = SudoRpcServerShutdown();
 
-        WriteLogEx(TEXT("Sudo for Windows Service stopped, Exit code: %u"),
+        WriteLogEx(TEXT("Sudo for Windows Service stopped. Exit code: %u"),
                    EXIT_CODE_MAX_LENGTH + 46, LOG_MESSAGE_INFO, ServiceStatus.dwWin32ExitCode);
         CloseHandle(LogFileHandle);
 
@@ -324,7 +326,7 @@ void WINAPI ServiceMain(DWORD argc, LPTSTR *argv) {
                 return;
             }
 
-            // Set the file encoding to Unicode (UTF-16).
+            // Set the file encoding to UTF-16.
             WORD header = 0xfeff;
             WriteFile(LogFileHandle, &header, sizeof(WORD), NULL, NULL);
         } else {
@@ -340,9 +342,9 @@ void WINAPI ServiceMain(DWORD argc, LPTSTR *argv) {
             if (!ReadFile(LogFileHandle, &header, sizeof(WORD), NULL, NULL)) {
                 return;
             }
-            // Check whether the file encoding is Unicode (UTF-16).
+            // Check whether the file encoding is UTF-16.
             if (header != 0xfeff) {
-                // If not, set it to Unicode (UTF-16).
+                // If not, set it to UTF-16.
                 header = 0xfeff;
                 WriteFile(LogFileHandle, &header, sizeof(WORD), NULL, NULL);
             }
@@ -360,7 +362,7 @@ void WINAPI ServiceMain(DWORD argc, LPTSTR *argv) {
     ServiceStatus.dwCurrentState = SERVICE_RUNNING;
     SetServiceStatus(ServiceStatusHandle, &ServiceStatus);
 
-    WriteLog(TEXT("Sudo for Windows Service started successfully."), LOG_MESSAGE_INFO);
+    WriteLog(TEXT("Sudo for Windows Service started."), LOG_MESSAGE_INFO);
 
     GetModuleFileName(NULL, ProgramDirectory, MAX_PATH);
     _tcsrchr(ProgramDirectory, TEXT('\\'))[1] = '\0';

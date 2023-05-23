@@ -8,9 +8,6 @@
  * and if the macro MICROSOFT_WINDOWS_WINBASE_H_DEFINE_INTERLOCKED_CPLUSPLUS_OVERLOADS
  * is not defined as 0, the compiler will display the warning C5105 in compiling.
  * But don't need to do this in C++ language.
- *
- * This problem appears in the Windows SDK 10.0.19041 and later.
- * I tried to reinstall the Windows SDK, but it didn't have any effect.
  */
 #ifndef __cplusplus
 #define MICROSOFT_WINDOWS_WINBASE_H_DEFINE_INTERLOCKED_CPLUSPLUS_OVERLOADS 0
@@ -22,5 +19,10 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-// The maximum length of username in Windows.
-#define USERNAME_MAX_LENGTH 20
+#define USERNAME_MAX_LENGTH 20 // The maximum length of username in Windows.
+#define PID_MAX_LENGTH 10
+#define EXIT_CODE_MAX_LENGTH 10
+#define ERROR_CODE_MAX_LENGTH 6
+
+ // The undisclosed console reference attribute.
+#define PROC_THREAD_ATTRIBUTE_CONSOLE_REFERENCE ProcThreadAttributeValue((PROC_THREAD_ATTRIBUTE_NUM) 10, FALSE, TRUE, FALSE)

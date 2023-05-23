@@ -8,17 +8,8 @@
 #include <signal.h>
 #include <conio.h>
 
-_Must_inspect_result_ _Ret_maybenull_ _Post_writable_byte_size_(size)
-void __RPC_FAR *__RPC_USER midl_user_allocate(_In_ size_t size) {
-    return malloc(size);
-}
-
-void __RPC_USER midl_user_free(_Pre_maybenull_ _Post_invalid_ void __RPC_FAR *pointer) {
-    free(pointer);
-}
-
 int run() {
-    signal(SIGINT, SIG_IGN); // Disable Ctrl+C.
+    signal(SIGINT, SIG_IGN); // Ignore Ctrl+C.
 
     TCHAR username[USERNAME_MAX_LENGTH + 1];
     {

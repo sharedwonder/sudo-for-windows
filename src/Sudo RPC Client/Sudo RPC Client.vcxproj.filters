@@ -26,12 +26,15 @@
     <ClCompile Include="RpcAllocate.c">
       <Filter>sources</Filter>
     </ClCompile>
+    <ClCompile Include="stub\ClientStubARM.c">
+      <Filter>sources\stub</Filter>
+    </ClCompile>
+    <ClCompile Include="stub\ClientStubARM64.c">
+      <Filter>sources\stub</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\SudoRpcClient.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\SudoRpc.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

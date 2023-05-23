@@ -5,13 +5,6 @@
 
 EXTERN_C_START
 
-#define PID_MAX_LENGTH 10
-#define EXIT_CODE_MAX_LENGTH 10
-#define ERROR_CODE_MAX_LENGTH 6
-
-// The undisclosed console reference attribute.
-#define PROC_THREAD_ATTRIBUTE_CONSOLE_REFERENCE ProcThreadAttributeValue((PROC_THREAD_ATTRIBUTE_NUM) 10, FALSE, TRUE, FALSE)
-
 /*
  * The message types of log.
  */
@@ -68,10 +61,10 @@ void ServiceLog(LPTSTR message, enum LOG_MESSAGE_TYPE messageType);
     (void) 0
 
 #ifdef _DEBUG
-#define WriteLogEbg(message) \
+#define WriteLogDbg(message) \
     ServiceLog((message), LOG_MESSAGE_DEBUG)
 
-#define WriteLogEbgEx(format, size, ...) \
+#define WriteLogDbgEx(format, size, ...) \
     { \
         LPTSTR __MESSAGE = (LPTSTR) malloc(size * sizeof(TCHAR)); \
         if (__MESSAGE != NULL) { \
@@ -83,7 +76,7 @@ void ServiceLog(LPTSTR message, enum LOG_MESSAGE_TYPE messageType);
     (void) 0
 #else
 #define WriteLogDbg(content) (void) 0
-#define WriteLogEbgEx(format, size, ...) (void) 0
+#define WriteLogDbgEx(format, size, ...) (void) 0
 #endif // _DEBUG
 
 // -------------------------------------------------------------------------------

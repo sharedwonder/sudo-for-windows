@@ -1,0 +1,62 @@
+name: Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  BUILD_CONFIGURATION: Release
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.2
+
+    - name: Restore NuGet packages
+      run: nuget restore .
+
+    - name: Build x64
+      run: msbuild -noLogo -m -p:Configuration=${{env.BUILD_CONFIGURATION}} -p:Platform=x64 .
+
+    - name: Build x86
+      run: msbuild -noLogo -m -p:Configuration=${{env.BUILD_CONFIGURATION}} -p:Platform=x86 .
+
+    - name: Build ARM64
+      run: msbuild -noLogo -m -p:Configuration=${{env.BUILD_CONFIGURATION}} -p:Platform=ARM64 .
+
+    - name: Build ARM
+      run: msbuild -noLogo -m -p:Configuration=${{env.BUILD_CONFIGURATION}} -p:Platform=ARM .
+
+    - name: Upload Artifact x64
+      uses: actions/upload-artifact@v3
+      with:
+        name: sudo-for-windows-x64
+        path: release/x64
+
+    - name: Upload Artifact x86
+      uses: actions/upload-artifact@v3
+      with:
+        name: sudo-for-windows-x86
+        path: release/x86
+
+    - name: Upload Artifact ARM64
+      uses: actions/upload-artifact@v3
+      with:
+        name: sudo-for-windows-arm64
+        path: release/ARM64
+
+    - name: Upload Artifact ARM
+      uses: actions/upload-artifact@v3
+      with:
+        name: sudo-for-windows-arm
+        path: release/ARM

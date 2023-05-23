@@ -29,6 +29,12 @@
     <ClCompile Include="stub\ServerStubX86.c">
       <Filter>sources\stub</Filter>
     </ClCompile>
+    <ClCompile Include="stub\ServerStubARM.c">
+      <Filter>sources\stub</Filter>
+    </ClCompile>
+    <ClCompile Include="stub\ServerStubARM64.c">
+      <Filter>sources\stub</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\service.h">

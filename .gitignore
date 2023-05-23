@@ -15,4 +15,5 @@ release/
 
 # Ignore MIDL compiler generated files.
 stub/
-SudoRpcX*.h
+SudoRpc*.h
+!SudoRpc.h

@@ -4,7 +4,7 @@ This software is licensed under [MIT Lincense](LICENSE).
 
 - **⚠ Warning: This software may have security vulnerabilities and should be used with caution.**
 
-[Latest release](https://github.com/sharedwonder/Sudo-for-Windows/releases/latest)
+[Latest release](https://github.com/sharedwonder/sudo-for-windows/releases/latest)
 
 - In the future, I will provide a way to install and uninstall automatically.
 
@@ -18,7 +18,7 @@ So I made this software. It can help us run commands as administrator without ha
 
 ## 2.Install
 
-First, download the compressed package of this software ([download the latest version](https://github.com/sharedwonder/Sudo-for-Windows/releases/latest)) and extract to a secure directory (**DON'T ALLOW *STANDARD USERS* TO MODIFY THE FILES INSIDE, OTHERWISE IT MAY LEAD TO *VULNERABILITY ELEVATION***).
+First, download the compressed package of this software ([download the latest version](https://github.com/sharedwonder/sudo-for-windows/releases/latest)) and extract to a secure directory (**DON'T ALLOW *STANDARD USERS* TO MODIFY THE FILES INSIDE, OTHERWISE IT MAY LEAD TO *VULNERABILITY ELEVATION***).
 
 Use this command to create the service for this software:
 
@@ -60,20 +60,20 @@ At last, remove the directory where the software is stored.
 
 Environment:
 
-- **[Microsoft Visual Studio 2019](https://aka.ms/vs)** or later *with* **Microsoft Visual C++ Build Tools v142** or later
+- **[Microsoft Visual Studio 2022](https://aka.ms/vs)** or later *with* **Microsoft Visual C++ Build Tools v143** or later
 - Microsoft Windows SDK 10 or later
 
 Commands:
 
 ```powershell
-git clone https://github.com/sharedwonder/Sudo-for-Windows.git
-cd Sudo-for-Windows
-msbuild "Sudo for Windows.sln" -property:Configuration=Release -property:Platform=x64
+git clone https://github.com/sharedwonder/sudo-for-windows.git
+cd sudo-for-windows
+msbuild "Sudo for Windows.sln" -p:Configuration=Release -p:Platform=<arch>
 ```
 
-- If you want to build a 32-bit version, just replace "x64" with "x86" (Unsupported arm or arm64).
+- Replace \<arch\> with the architecture (x64, x86, ARM, ARM64) you want to build
 
-Then you can see the target files in the directory "release\\x64" (or "release\\x86" if building with Platform=x86).
+Then you can see the target files in the directory "release\\\<arch\>".
 There should be the following target files:
 
 - su.exe

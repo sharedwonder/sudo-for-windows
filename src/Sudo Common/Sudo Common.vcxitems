@@ -15,6 +15,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)include\SudoFramework.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\SudoRpc.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\SudoRpcARM.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\SudoRpcARM64.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\SudoRpcX64.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\SudoRpcX86.h" />
   </ItemGroup>

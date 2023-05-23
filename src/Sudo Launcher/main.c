@@ -8,7 +8,7 @@
 #include <signal.h>
 
 int run(LPTSTR commandLine) {
-    signal(SIGINT, SIG_IGN); // Disable Ctrl+C.
+    signal(SIGINT, SIG_IGN); // Ignore Ctrl+C.
 
     TCHAR username[20];
     {

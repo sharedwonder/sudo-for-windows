@@ -3,17 +3,6 @@
 
 #include "SudoConfiguration.h"
 
-#define DefaultValueAttemptLimit 3
-
-static HKEY configKey;
-
-_Success_(return) BOOL LoadSudoConfig(_Out_ PSUDO_CONFIG config) {
-    if (RegOpenKey(HKEY_LOCAL_MACHINE, TEXT("SOFTWARE\\Sudo for Windows\\config"), &configKey) != ERROR_SUCCESS) {
-        if (RegCreateKey(HKEY_LOCAL_MACHINE, TEXT("SOFTWARE\\Sudo for Windows\\config"), &configKey) != ERROR_SUCCESS) {
-            return FALSE;
-        }
-    }
-
 #define GET_CONFIG(name) \
     { \
         DWORD size = sizeof(config->name); \
@@ -32,11 +21,19 @@ _Success_(return) BOOL LoadSudoConfig(_Out_ PSUDO_CONFIG config) {
         config->name = (valueType) value; \
     }
 
+#define DefaultValueAttemptLimit 3
+
+static HKEY configKey;
+
+_Success_(return) BOOL LoadSudoConfig(_Out_ PSUDO_CONFIG config) {
+    if (RegOpenKey(HKEY_LOCAL_MACHINE, TEXT("SOFTWARE\\Sudo for Windows\\config"), &configKey) != ERROR_SUCCESS) {
+        if (RegCreateKey(HKEY_LOCAL_MACHINE, TEXT("SOFTWARE\\Sudo for Windows\\config"), &configKey) != ERROR_SUCCESS) {
+            return FALSE;
+        }
+    }
+
     // Read configuration from the registry.
     GET_CONFIG(AttemptLimit);
-
-#undef GET_CONFIG
-#undef GET_CONFIG_EX
 
     return TRUE;
 }
