@@ -431,9 +431,9 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.c" />
+    <ClCompile Include="Main.c" />
     <ClCompile Include="RpcAllocate.c" />
-    <ClCompile Include="service.c" />
+    <ClCompile Include="Service.c" />
     <ClCompile Include="stub\ServerStubARM.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">true</ExcludedFromBuild>
@@ -468,7 +468,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\service.h" />
+    <ClInclude Include="include\Service.h" />
     <ClInclude Include="include\SudoRpcServer.h" />
   </ItemGroup>
   <ItemGroup>

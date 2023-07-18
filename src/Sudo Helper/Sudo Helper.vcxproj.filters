@@ -11,15 +11,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.c">
+    <ClCompile Include="Main.c">
       <Filter>sources</Filter>
     </ClCompile>
-    <ClCompile Include="password.c">
+    <ClCompile Include="Password.c">
       <Filter>sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\password.h">
+    <ClInclude Include="include\Password.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

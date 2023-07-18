@@ -367,7 +367,7 @@
     <PreBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="client.c" />
+    <ClCompile Include="Client.c" />
     <ClCompile Include="RpcAllocate.c" />
     <ClCompile Include="stub\ClientStubARM.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">true</ExcludedFromBuild>

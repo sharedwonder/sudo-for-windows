@@ -335,8 +335,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="configuration.c" />
-    <ClCompile Include="dllmain.c" />
+    <ClCompile Include="Configuration.c" />
+    <ClCompile Include="DLLMain.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\SudoConfiguration.h" />

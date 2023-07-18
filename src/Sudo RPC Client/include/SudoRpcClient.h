@@ -4,9 +4,9 @@
 #include "SudoRpc.h"
 
 #ifdef SUDORPCCLIENT_EXPORTS
-#define SUDO_RPC_CLIENT_API __declspec(dllexport)
+    #define SUDO_RPC_CLIENT_API __declspec(dllexport)
 #else
-#define SUDO_RPC_CLIENT_API __declspec(dllimport)
+    #define SUDO_RPC_CLIENT_API __declspec(dllimport)
 #endif // SUDORPCCLIENT_EXPORTS
 
 EXTERN_C_START

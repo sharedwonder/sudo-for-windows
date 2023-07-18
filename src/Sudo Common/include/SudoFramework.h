@@ -10,10 +10,10 @@
  * But don't need to do this in C++ language.
  */
 #ifndef __cplusplus
-#define MICROSOFT_WINDOWS_WINBASE_H_DEFINE_INTERLOCKED_CPLUSPLUS_OVERLOADS 0
+    #define MICROSOFT_WINDOWS_WINBASE_H_DEFINE_INTERLOCKED_CPLUSPLUS_OVERLOADS 0
 #endif // !__cplusplus
 
-#include <windows.h>
+#include <Windows.h>
 #include <tchar.h>
 #include <stdlib.h>
 #include <stdio.h>

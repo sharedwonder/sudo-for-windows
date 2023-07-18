@@ -14,7 +14,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="client.c">
+    <ClCompile Include="Client.c">
       <Filter>sources</Filter>
     </ClCompile>
     <ClCompile Include="stub\ClientStubX64.c">

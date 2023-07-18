@@ -11,10 +11,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="dllmain.c">
+    <ClCompile Include="DLLMain.c">
       <Filter>sources</Filter>
     </ClCompile>
-    <ClCompile Include="configuration.c">
+    <ClCompile Include="Configuration.c">
       <Filter>sources</Filter>
     </ClCompile>
   </ItemGroup>

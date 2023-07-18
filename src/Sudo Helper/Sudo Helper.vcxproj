@@ -343,11 +343,11 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="password.c" />
-    <ClCompile Include="main.c" />
+    <ClCompile Include="Password.c" />
+    <ClCompile Include="Main.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\password.h" />
+    <ClInclude Include="include\Password.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

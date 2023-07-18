@@ -14,9 +14,9 @@ typedef struct SUDO_CONFIG {
 typedef SUDO_CONFIG *PSUDO_CONFIG;
 
 #ifdef SUDOCONFIGURATION_EXPORTS
-#define SUDO_CONFIG_API __declspec(dllexport)
+    #define SUDO_CONFIG_API __declspec(dllexport)
 #else
-#define SUDO_CONFIG_API __declspec(dllimport)
+    #define SUDO_CONFIG_API __declspec(dllimport)
 #endif // SUDOCONFIGURATION_EXPORTS
 
 SUDO_CONFIG_API extern SUDO_CONFIG SudoConfig;

@@ -2,7 +2,7 @@
 // This software is licensed under MIT License.
 
 #include "SudoFramework.h"
-#include "service.h"
+#include "Service.h"
 
 int main() {
     SERVICE_TABLE_ENTRY ServiceTable[2];

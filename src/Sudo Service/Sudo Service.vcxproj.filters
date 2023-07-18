@@ -14,10 +14,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.c">
+    <ClCompile Include="Main.c">
       <Filter>sources</Filter>
     </ClCompile>
-    <ClCompile Include="service.c">
+    <ClCompile Include="Service.c">
       <Filter>sources</Filter>
     </ClCompile>
     <ClCompile Include="RpcAllocate.c">
@@ -37,7 +37,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\service.h">
+    <ClInclude Include="include\Service.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\SudoRpcServer.h">
