@@ -18,15 +18,15 @@ So I made this software. It can help us run commands as administrator without ha
 
 ## 2.Install
 
-First, download the compressed package of this software ([download the latest version](https://github.com/sharedwonder/sudo-for-windows/releases/latest)) and extract to a secure directory (**DON'T ALLOW *STANDARD USERS* TO MODIFY THE FILES INSIDE, OTHERWISE IT MAY LEAD TO *VULNERABILITY ELEVATION***).
+First, download the compressed package of this software ([download the latest version](https://github.com/sharedwonder/sudo-for-windows/releases/latest)) and extract to a secure directory (***PLEASE SET PERMISSIONS TO PREVENT STANDARD USERS FROM MODIFYING THESE FILES. OTHERWISE, STANDARD USERS WILL BE ABLE TO RUN ELEVATED PROCESSES***).
 
 Use this command to create the service for this software:
 
 ```powershell
-sc create SudoService type= own start= auto binPath= "<service>" DisplayName= "Sudo for Windows Service"
+sc create SudoService type= own start= auto binPath= "<path-service-exe>" DisplayName= "Sudo for Windows Service"
 ```
 
-- Replace \<service\> with the path to "SudoService.exe".
+- Replace `<path-service-exe>` with the path to "SudoService.exe".
 
 Then, start the service:
 
@@ -58,10 +58,10 @@ At last, remove the directory where the software is stored.
 
 ## 4.Build
 
-Environment:
+Required environment:
 
-- **[Microsoft Visual Studio 2022](https://aka.ms/vs)** or later *with* **Microsoft Visual C++ Build Tools v143** or later
-- Microsoft Windows SDK 10 or later
+- [Microsoft Visual Studio 2022](https://aka.ms/vs) or later *with Microsoft Visual C++ Build Tools v143 or later*
+- Microsoft Windows SDK 10.0 or later
 
 Commands:
 
@@ -71,9 +71,10 @@ cd sudo-for-windows
 msbuild "Sudo for Windows.sln" -p:Configuration=Release -p:Platform=<arch>
 ```
 
-- Replace \<arch\> with the architecture (x64, x86, ARM, ARM64) you want to build
+- Replace `<arch>` with the architecture (x64, x86, ARM, ARM64) you want to build.
 
-Then you can see the target files in the directory "release\\\<arch\>".
+Then you can see the target files in the directory `release\<arch>`.
+
 There should be the following target files:
 
 - su.exe
