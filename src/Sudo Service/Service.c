@@ -5,8 +5,9 @@
 #include "SudoConfiguration.h"
 #include "SudoRpcServer.h"
 
-#include <direct.h>
 #include <time.h>
+
+#define PROC_THREAD_ATTRIBUTE_CONSOLE_REFERENCE ProcThreadAttributeValue((PROC_THREAD_ATTRIBUTE_NUM) 10, FALSE, TRUE, FALSE)
 
 static SERVICE_STATUS ServiceStatus;
 static SERVICE_STATUS_HANDLE ServiceStatusHandle;
@@ -46,12 +47,12 @@ DWORD LaunchElevatedProcess(DWORD clientProcessId, LPTSTR username, LPTSTR comma
         goto InitFailed;
     }
 
-    // Using to set the new process attributes.
+    // Used to set the new process attributes.
     STARTUPINFOEX startupInfoEx = {
         .StartupInfo.cb = sizeof(STARTUPINFOEX)
     };
 
-    // Setting the new process attributes.
+    // Sets the new process attributes.
     {
         size_t returnLength = 0;
 
@@ -85,7 +86,7 @@ DWORD LaunchElevatedProcess(DWORD clientProcessId, LPTSTR username, LPTSTR comma
     }
 
     if (!TokenIsElevated(clientToken)) {
-        // Launch the helper program to authentication the request.
+        // Launches the helper program to authentication the request.
 
         TCHAR helperCommandLine[MAX_PATH + 2 + USERNAME_MAX_LENGTH + 2 + 4 + 1];
         _stprintf_s(helperCommandLine, sizeof(helperCommandLine) / sizeof(TCHAR),
@@ -142,7 +143,7 @@ DWORD LaunchElevatedProcess(DWORD clientProcessId, LPTSTR username, LPTSTR comma
             goto Failed;
         }
 
-        // Get the elevated token of the user.
+        // Gets the elevated token of the user.
 
         TOKEN_LINKED_TOKEN linkedToken;
         if (!QueryTokenInformation(clientToken, TokenLinkedToken, &linkedToken)) {
@@ -174,7 +175,7 @@ DWORD LaunchElevatedProcess(DWORD clientProcessId, LPTSTR username, LPTSTR comma
     CloseHandle(clientProcess);
     free(startupInfoEx.lpAttributeList);
 
-    WriteLogEx(TEXT("Elevated successfully:\r\n"
+    WriteLogEx(TEXT("Elevated successfully.\r\n"
                     "Client process ID: %u\r\n"
                     "User: %s"),
                PID_MAX_LENGTH + USERNAME_MAX_LENGTH + 50,
@@ -192,7 +193,7 @@ InitFailed:
     size_t messageSize = _tcslen(message);
     message[messageSize -= 2] = '\0';
 
-    WriteLogEx(TEXT("Failed to elevate:\r\n"
+    WriteLogEx(TEXT("Failed to elevate.\r\n"
                     "Client process ID: %u\r\n"
                     "User: %s\r\n"
                     "Error code: %u\r\n"
@@ -235,7 +236,7 @@ void ServiceLog(LPTSTR message, enum LOG_MESSAGE_TYPE messageType) {
     TCHAR formattedTime[128];
     DWORD formattedTimeSize;
 
-    // Get the formatted time.
+    // Gets the formatted time.
     {
         time_t nowTime;
         struct tm timeStruct;
@@ -288,7 +289,6 @@ DWORD WINAPI ServiceRun() {
 }
 
 void WINAPI ServiceMain(DWORD argc, LPTSTR *argv) {
-    // Unused parameters.
     UNREFERENCED_PARAMETER(argc);
     UNREFERENCED_PARAMETER(argv);
 
@@ -301,12 +301,12 @@ void WINAPI ServiceMain(DWORD argc, LPTSTR *argv) {
     ServiceStatus.dwWaitHint = 0;
     ServiceStatusHandle = RegisterServiceCtrlHandler(TEXT("SudoService"), ServiceControlHandler);
 
-    // Open the log file.
+    // Opens the log file.
     {
         TCHAR logFile[MAX_PATH + 1] = {TEXT('\0')};
         TCHAR tempDirectory[MAX_PATH + 1] = {TEXT('\0')};
 
-        GetEnvironmentVariable(TEXT("TEMP"), tempDirectory, MAX_PATH); // Get the path of the temporary directory.
+        GetEnvironmentVariable(TEXT("TEMP"), tempDirectory, MAX_PATH);
 
         if (_taccess(tempDirectory, 0) == -1) {
             if (!CreateDirectory(tempDirectory, NULL)) {
@@ -318,25 +318,19 @@ void WINAPI ServiceMain(DWORD argc, LPTSTR *argv) {
         _tcscat_s(logFile, MAX_PATH, TEXT("\\SudoService.log"));
 
         if (_waccess(logFile, 0) == -1) {
-            // The log file is not existing.
             LogFileHandle = CreateFile(logFile, GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ,
                                        NULL, CREATE_NEW, FILE_ATTRIBUTE_NORMAL, NULL);
-            // Check whether the handle is valid.
             if (LogFileHandle == INVALID_HANDLE_VALUE) {
                 return;
             }
 
-            // Set the file encoding to UTF-16.
         #ifdef UNICODE
-            // Set the file encoding to Unicode (UTF-16).
             WORD header = 0xfeff;
             WriteFile(LogFileHandle, &header, sizeof(WORD), NULL, NULL);
         #endif // UNICODE
         } else {
-            // The log file is already existing.
             LogFileHandle = CreateFile(logFile, GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ,
                                        NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-            // Check whether the handle is valid.
             if (LogFileHandle == INVALID_HANDLE_VALUE) {
                 return;
             }
@@ -346,15 +340,12 @@ void WINAPI ServiceMain(DWORD argc, LPTSTR *argv) {
             if (!ReadFile(LogFileHandle, &header, sizeof(WORD), NULL, NULL)) {
                 return;
             }
-            // Check whether the file encoding is UTF-16.
             if (header != 0xfeff) {
-                // If not, set it to UTF-16.
                 header = 0xfeff;
                 WriteFile(LogFileHandle, &header, sizeof(WORD), NULL, NULL);
             }
         #endif // UNICODE
 
-            // Move the pointer to the end of the log file.
             SetFilePointer(LogFileHandle, 0, NULL, FILE_END);
         }
     }

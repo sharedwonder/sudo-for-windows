@@ -126,24 +126,24 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</OutDir>
-    <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\cache\</IntDir>
+    <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\target\</OutDir>
+    <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</IntDir>
     <TargetName>SudoRpcClient</TargetName>
     <IncludePath>include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
     <PublicIncludeDirectories>include;$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</OutDir>
-    <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\cache\</IntDir>
+    <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\target\</OutDir>
+    <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</IntDir>
     <TargetName>SudoRpcClient</TargetName>
     <IncludePath>include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
     <PublicIncludeDirectories>include;$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</OutDir>
-    <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\cache\</IntDir>
+    <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\target\</OutDir>
+    <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</IntDir>
     <TargetName>SudoRpcClient</TargetName>
     <IncludePath>include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
     <PublicIncludeDirectories>include;$(PublicIncludeDirectories)</PublicIncludeDirectories>
@@ -153,21 +153,21 @@
     <IncludePath>include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
     <PublicIncludeDirectories>include;$(PublicIncludeDirectories)</PublicIncludeDirectories>
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</OutDir>
-    <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\cache\</IntDir>
+    <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\target\</OutDir>
+    <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <TargetName>SudoRpcClient</TargetName>
     <IncludePath>include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
     <PublicIncludeDirectories>include;$(PublicIncludeDirectories)</PublicIncludeDirectories>
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</OutDir>
-    <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\cache\</IntDir>
+    <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\target\</OutDir>
+    <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</OutDir>
-    <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\cache\</IntDir>
+    <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\target\</OutDir>
+    <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</IntDir>
     <TargetName>SudoRpcClient</TargetName>
     <IncludePath>include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
     <PublicIncludeDirectories>include;$(PublicIncludeDirectories)</PublicIncludeDirectories>
@@ -177,16 +177,16 @@
     <IncludePath>include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
     <PublicIncludeDirectories>include;$(PublicIncludeDirectories)</PublicIncludeDirectories>
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</OutDir>
-    <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\cache\</IntDir>
+    <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\target\</OutDir>
+    <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <TargetName>SudoRpcClient</TargetName>
     <IncludePath>include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
     <PublicIncludeDirectories>include;$(PublicIncludeDirectories)</PublicIncludeDirectories>
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</OutDir>
-    <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\cache\</IntDir>
+    <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\target\</OutDir>
+    <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -226,7 +226,7 @@
       <ModuleDefinitionFile>interface.def</ModuleDefinitionFile>
     </Link>
     <PostBuildEvent>
-      <Command>cmd /c if not exist "$(SolutionDir)release\$(PlatformTarget)" (mkdir "$(SolutionDir)release\$(PlatformTarget)") &amp; copy /y "$(TargetPath)" "$(SolutionDir)release\$(PlatformTarget)\$(TargetFileName)"</Command>
+      <Command>cmd /c if not exist "$(SolutionDir)target\$(PlatformTarget)" (mkdir "$(SolutionDir)target\$(PlatformTarget)") &amp; copy /y "$(TargetPath)" "$(SolutionDir)target\$(PlatformTarget)\$(TargetFileName)"</Command>
       <Message>Copy the target file</Message>
     </PostBuildEvent>
     <PreBuildEvent />
@@ -307,7 +307,7 @@
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>cmd /c if not exist "$(SolutionDir)release\$(PlatformTarget)" (mkdir "$(SolutionDir)release\$(PlatformTarget)") &amp; copy /y "$(TargetPath)" "$(SolutionDir)release\$(PlatformTarget)\$(TargetFileName)"</Command>
+      <Command>cmd /c if not exist "$(SolutionDir)target\$(PlatformTarget)" (mkdir "$(SolutionDir)target\$(PlatformTarget)") &amp; copy /y "$(TargetPath)" "$(SolutionDir)target\$(PlatformTarget)\$(TargetFileName)"</Command>
       <Message>Copy the target file</Message>
     </PostBuildEvent>
     <PreBuildEvent />
@@ -334,7 +334,7 @@
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>cmd /c if not exist "$(SolutionDir)release\$(PlatformTarget)" (mkdir "$(SolutionDir)release\$(PlatformTarget)") &amp; copy /y "$(TargetPath)" "$(SolutionDir)release\$(PlatformTarget)\$(TargetFileName)"</Command>
+      <Command>cmd /c if not exist "$(SolutionDir)target\$(PlatformTarget)" (mkdir "$(SolutionDir)target\$(PlatformTarget)") &amp; copy /y "$(TargetPath)" "$(SolutionDir)target\$(PlatformTarget)\$(TargetFileName)"</Command>
       <Message>Copy the target file</Message>
     </PostBuildEvent>
     <PreBuildEvent />
@@ -360,7 +360,7 @@
       <ModuleDefinitionFile>interface.def</ModuleDefinitionFile>
     </Link>
     <PostBuildEvent>
-      <Command>cmd /c if not exist "$(SolutionDir)release\$(PlatformTarget)" (mkdir "$(SolutionDir)release\$(PlatformTarget)") &amp; copy /y "$(TargetPath)" "$(SolutionDir)release\$(PlatformTarget)\$(TargetFileName)"</Command>
+      <Command>cmd /c if not exist "$(SolutionDir)target\$(PlatformTarget)" (mkdir "$(SolutionDir)target\$(PlatformTarget)") &amp; copy /y "$(TargetPath)" "$(SolutionDir)target\$(PlatformTarget)\$(TargetFileName)"</Command>
       <Message>Copy the target file</Message>
     </PostBuildEvent>
     <PreBuildEvent />

@@ -1,19 +1,14 @@
-# Ignore *.user files.
+build/
+target/
+
+# Visual Studio
+.vs/
 *.user
 
-# Ignore Visual Studio cache folder.
-.vs/
-
-# Ignore Visual Studio Code folder.
+# Visual Studio Code
 .vscode/
 
-# Ignore build folder.
-build/
-
-# Ignore release folder.
-release/
-
-# Ignore MIDL compiler generated files.
+# MIDL compiler generated files
 stub/
 SudoRpc*.h
 !SudoRpc.h

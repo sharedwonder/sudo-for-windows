@@ -1,4 +1,4 @@
-// Copyright (c) Liu Baihao. All rights reserved.
+// Copyright (c) 2022 Liu Baihao. All rights reserved.
 // This software is licensed under the MIT License.
 
 #include "SudoConfiguration.h"
