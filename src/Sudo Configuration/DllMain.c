@@ -1,5 +1,5 @@
 ﻿// Copyright (c) 2022 Liu Baihao. All rights reserved.
-// This software is licensed under MIT License.
+// This software is licensed under the MIT License.
 
 #include "SudoFramework.h"
 #include "SudoConfiguration.h"

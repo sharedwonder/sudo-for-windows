@@ -126,14 +126,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\target\</OutDir>
+    <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\targets\</OutDir>
     <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</IntDir>
     <IncludePath>include;$(SolutionDir)src\Sudo Configuration\include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
     <TargetName>SudoService</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\target\</OutDir>
+    <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\targets\</OutDir>
     <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</IntDir>
     <IncludePath>include;$(SolutionDir)src\Sudo Configuration\include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
     <TargetName>SudoService</TargetName>
@@ -141,7 +141,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <TargetName>SudoService</TargetName>
-    <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\target\</OutDir>
+    <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\targets\</OutDir>
     <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</IntDir>
     <IncludePath>include;$(SolutionDir)src\Sudo Configuration\include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
@@ -149,19 +149,19 @@
     <IncludePath>include;$(SolutionDir)src\Sudo Configuration\include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
     <LinkIncremental>true</LinkIncremental>
     <TargetName>SudoService</TargetName>
-    <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\target\</OutDir>
+    <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\targets\</OutDir>
     <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <IncludePath>include;$(SolutionDir)src\Sudo Configuration\include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
     <LinkIncremental>true</LinkIncremental>
     <TargetName>SudoService</TargetName>
-    <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\target\</OutDir>
+    <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\targets\</OutDir>
     <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\target\</OutDir>
+    <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\targets\</OutDir>
     <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</IntDir>
     <IncludePath>include;$(SolutionDir)src\Sudo Configuration\include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
     <TargetName>SudoService</TargetName>
@@ -170,14 +170,14 @@
     <IncludePath>include;$(SolutionDir)src\Sudo Configuration\include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
     <TargetName>SudoService</TargetName>
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\target\</OutDir>
+    <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\targets\</OutDir>
     <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <IncludePath>include;$(SolutionDir)src\Sudo Configuration\include;$(SolutionDir)src\Sudo Common\include;$(IncludePath)</IncludePath>
     <TargetName>SudoService</TargetName>
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\target\</OutDir>
+    <OutDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\targets\</OutDir>
     <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)-$(PlatformTarget)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -192,7 +192,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>SudoConfiguration.lib;rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\target</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\targets</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <HeaderFileName>$(SolutionDir)src\Sudo Common\include\SudoRpcX86.h</HeaderFileName>
@@ -222,7 +222,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>SudoConfiguration.lib;rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\target</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\targets</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <HeaderFileName>$(SolutionDir)src\Sudo Common\include\SudoRpcX86.h</HeaderFileName>
@@ -230,7 +230,7 @@
       <ServerStubFile>stub\ServerStubX86.c</ServerStubFile>
     </Midl>
     <PostBuildEvent>
-      <Command>cmd /c if not exist "$(SolutionDir)target\$(PlatformTarget)" (mkdir "$(SolutionDir)target\$(PlatformTarget)") &amp; copy /y "$(TargetPath)" "$(SolutionDir)target\$(PlatformTarget)\$(TargetFileName)"</Command>
+      <Command>cmd /c if not exist "$(SolutionDir)targets\$(PlatformTarget)" (mkdir "$(SolutionDir)targets\$(PlatformTarget)") &amp; copy /y "$(TargetPath)" "$(SolutionDir)targets\$(PlatformTarget)\$(TargetFileName)"</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Copy the target file</Message>
@@ -254,7 +254,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>SudoConfiguration.lib;rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\target</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\targets</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <HeaderFileName>$(SolutionDir)src\Sudo Common\include\SudoRpcX64.h</HeaderFileName>
@@ -280,7 +280,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>SudoConfiguration.lib;rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\target</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\targets</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <HeaderFileName>$(SolutionDir)src\Sudo Common\include\SudoRpcARM64.h</HeaderFileName>
@@ -306,7 +306,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>SudoConfiguration.lib;rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\target</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\targets</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <HeaderFileName>$(SolutionDir)src\Sudo Common\include\SudoRpcARM.h</HeaderFileName>
@@ -336,7 +336,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>SudoConfiguration.lib;rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\target</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\targets</AdditionalLibraryDirectories>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
     <Midl>
@@ -345,7 +345,7 @@
       <ServerStubFile>stub\ServerStubX64.c</ServerStubFile>
     </Midl>
     <PostBuildEvent>
-      <Command>cmd /c if not exist "$(SolutionDir)target\$(PlatformTarget)" (mkdir "$(SolutionDir)target\$(PlatformTarget)") &amp; copy /y "$(TargetPath)" "$(SolutionDir)target\$(PlatformTarget)\$(TargetFileName)"</Command>
+      <Command>cmd /c if not exist "$(SolutionDir)targets\$(PlatformTarget)" (mkdir "$(SolutionDir)targets\$(PlatformTarget)") &amp; copy /y "$(TargetPath)" "$(SolutionDir)targets\$(PlatformTarget)\$(TargetFileName)"</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Copy the target file</Message>
@@ -373,7 +373,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>SudoConfiguration.lib;rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\target</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\targets</AdditionalLibraryDirectories>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
     <Midl>
@@ -382,7 +382,7 @@
       <ServerStubFile>stub\ServerStubARM64.c</ServerStubFile>
     </Midl>
     <PostBuildEvent>
-      <Command>cmd /c if not exist "$(SolutionDir)target\$(PlatformTarget)" (mkdir "$(SolutionDir)target\$(PlatformTarget)") &amp; copy /y "$(TargetPath)" "$(SolutionDir)target\$(PlatformTarget)\$(TargetFileName)"</Command>
+      <Command>cmd /c if not exist "$(SolutionDir)targets\$(PlatformTarget)" (mkdir "$(SolutionDir)targets\$(PlatformTarget)") &amp; copy /y "$(TargetPath)" "$(SolutionDir)targets\$(PlatformTarget)\$(TargetFileName)"</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Copy the target file</Message>
@@ -410,7 +410,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>SudoConfiguration.lib;rpcrt4.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\target</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)build\Sudo Configuration\$(Configuration)-$(PlatformTarget)\targets</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <HeaderFileName>$(SolutionDir)src\Sudo Common\include\SudoRpcARM.h</HeaderFileName>
@@ -418,7 +418,7 @@
       <ServerStubFile>stub\ServerStubARM.c</ServerStubFile>
     </Midl>
     <PostBuildEvent>
-      <Command>cmd /c if not exist "$(SolutionDir)target\$(PlatformTarget)" (mkdir "$(SolutionDir)target\$(PlatformTarget)") &amp; copy /y "$(TargetPath)" "$(SolutionDir)target\$(PlatformTarget)\$(TargetFileName)"</Command>
+      <Command>cmd /c if not exist "$(SolutionDir)targets\$(PlatformTarget)" (mkdir "$(SolutionDir)targets\$(PlatformTarget)") &amp; copy /y "$(TargetPath)" "$(SolutionDir)targets\$(PlatformTarget)\$(TargetFileName)"</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Copy the target file</Message>

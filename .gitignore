@@ -1,9 +1,9 @@
 build/
-target/
+targets/
 
 # Visual Studio
 .vs/
-*.user
+*.vcxproj.user
 
 # Visual Studio Code
 .vscode/

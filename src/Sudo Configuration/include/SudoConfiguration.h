@@ -1,5 +1,5 @@
 ﻿// Copyright (c) 2022 Liu Baihao. All rights reserved.
-// This software is licensed under MIT License.
+// This software is licensed under the MIT License.
 
 #pragma once
 
@@ -11,13 +11,15 @@ typedef struct SUDO_CONFIG {
     DWORD AttemptLimit;
 } SUDO_CONFIG;
 
+#define SudoConfigDefaultValueAttemptLimit 3
+
 typedef SUDO_CONFIG *PSUDO_CONFIG;
 
 #ifdef SUDOCONFIGURATION_EXPORTS
     #define SUDO_CONFIG_API __declspec(dllexport)
 #else
     #define SUDO_CONFIG_API __declspec(dllimport)
-#endif // SUDOCONFIGURATION_EXPORTS
+#endif
 
 SUDO_CONFIG_API extern SUDO_CONFIG SudoConfig;
 

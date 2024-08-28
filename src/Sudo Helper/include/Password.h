@@ -1,5 +1,5 @@
 // Copyright (c) 2022 Liu Baihao. All rights reserved.
-// This software is licensed under MIT License.
+// This software is licensed under the MIT License.
 
 #pragma once
 
@@ -7,8 +7,8 @@
 
 EXTERN_C_START
 
-// The max length of a password in Windows.
-#define PASSWORD_MAX_LENGTH 257
+// The max length of a password in Windows
+#define PASSWORD_MAX_LENGTH 256
 
 /*!
  * Reads a password from the console (no echo).

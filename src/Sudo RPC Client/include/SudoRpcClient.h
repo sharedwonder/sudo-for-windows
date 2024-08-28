@@ -1,5 +1,5 @@
 // Copyright (c) 2022 Liu Baihao. All rights reserved.
-// This software is licensed under MIT License.
+// This software is licensed under the MIT License.
 
 #include "SudoRpc.h"
 
@@ -7,7 +7,7 @@
     #define SUDO_RPC_CLIENT_API __declspec(dllexport)
 #else
     #define SUDO_RPC_CLIENT_API __declspec(dllimport)
-#endif // SUDORPCCLIENT_EXPORTS
+#endif
 
 EXTERN_C_START
 

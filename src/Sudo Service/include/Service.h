@@ -1,5 +1,5 @@
 // Copyright (c) 2022 Liu Baihao. All rights reserved.
-// This software is licensed under MIT License.
+// This software is licensed under the MIT License.
 
 #include "SudoFramework.h"
 
@@ -16,7 +16,7 @@ enum LOG_MESSAGE_TYPE {
 };
 
 /*!
- * Queries token information.
+ * Queries the token information.
  *
  * @param token The token to query.
  * @param tokenInfoClass The information class to query.
@@ -44,7 +44,31 @@ DWORD LaunchElevatedProcess(DWORD clientProcessId, LPTSTR username, LPTSTR comma
  */
 void ServiceLog(LPTSTR message, enum LOG_MESSAGE_TYPE messageType);
 
-// --------------------Extended the function ServiceLog macros--------------------
+/*!
+ * Handles service control requests.
+ *
+ * @param request The service control request.
+ */
+void WINAPI __callback ServiceControlHandler(DWORD request);
+
+/*!
+ * Runs the service.
+ *
+ * @return DWORD The exit code.
+ */
+DWORD WINAPI ServiceRun();
+
+/*!
+ * Sets up the service and runs the service.
+ *
+ * @param argc
+ * @param argv
+ */
+void WINAPI ServiceMain(DWORD argc, LPTSTR *argv);
+
+EXTERN_C_END
+
+// Logging Macros
 
 #define WriteLog(message, messageType) \
     ServiceLog((message), (messageType))
@@ -77,30 +101,4 @@ void ServiceLog(LPTSTR message, enum LOG_MESSAGE_TYPE messageType);
 #else
     #define WriteLogDbg(content) (void) 0
     #define WriteLogDbgEx(format, size, ...) (void) 0
-#endif // _DEBUG
-
-// -------------------------------------------------------------------------------
-
-/*!
- * Handles service control requests.
- *
- * @param request The service control request.
- */
-void WINAPI __callback ServiceControlHandler(DWORD request);
-
-/*!
- * Runs the service.
- *
- * @return DWORD The exit code.
- */
-DWORD WINAPI ServiceRun();
-
-/*!
- * Sets up the service and runs the service.
- *
- * @param argc
- * @param argv
- */
-void WINAPI ServiceMain(DWORD argc, LPTSTR *argv);
-
-EXTERN_C_END
+#endif

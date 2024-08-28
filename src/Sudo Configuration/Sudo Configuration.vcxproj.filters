@@ -11,7 +11,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DLLMain.c">
+    <ClCompile Include="DllMain.c">
       <Filter>sources</Filter>
     </ClCompile>
     <ClCompile Include="Configuration.c">

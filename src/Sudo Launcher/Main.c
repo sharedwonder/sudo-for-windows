@@ -1,5 +1,5 @@
 // Copyright (c) 2022 Liu Baihao. All rights reserved.
-// This software is licensed under MIT License.
+// This software is licensed under the MIT License.
 
 #include "SudoFramework.h"
 #include "SudoConfiguration.h"
@@ -8,7 +8,7 @@
 #include <signal.h>
 
 int run(LPTSTR commandLine) {
-    signal(SIGINT, SIG_IGN); // Ignore Ctrl+C.
+    signal(SIGINT, SIG_IGN); // Ignores Ctrl+C
 
     TCHAR username[20];
     {
@@ -28,8 +28,8 @@ int run(LPTSTR commandLine) {
         }
     }
 
-    TCHAR currentDirectory[MAX_PATH + 1];
-    GetCurrentDirectory(MAX_PATH, currentDirectory);
+    TCHAR currentDirectory[MAX_PATH];
+    GetCurrentDirectory(MAX_PATH - 1, currentDirectory);
 
     HANDLE process = INVALID_HANDLE_VALUE;
 
@@ -38,9 +38,9 @@ int run(LPTSTR commandLine) {
     {
         LPTCH pointer = environment;
         while (true) {
-            ++ pointer;
+            ++pointer;
             if (*pointer == TEXT('\0')) {
-                ++ pointer;
+                ++pointer;
                 if (*pointer == TEXT('\0')) {
                     break;
                 }
@@ -65,7 +65,7 @@ int run(LPTSTR commandLine) {
 
     FreeEnvironmentStrings(environment);
 
-    // Wait for the new process to exit.
+    // Waits for the new process to exit
     WaitForSingleObject(process, INFINITE);
 
     int exitCode;
@@ -102,7 +102,7 @@ int _tmain(int argc, LPTSTR *argv) {
             if (*commandLine == TEXT(' ') && !inQuotes) {
                 flag = true;
             }
-            ++ commandLine;
+            ++commandLine;
         }
     }
 

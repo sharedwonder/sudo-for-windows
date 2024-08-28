@@ -1,6 +1,6 @@
 # Sudo for Windows
 
-This software is licensed under [MIT Lincense](LICENSE).
+This software is licensed under the [MIT Lincense](LICENSE).
 
 - **⚠ Warning: This software may have security vulnerabilities and should be used with caution.**
 

@@ -1,5 +1,5 @@
 // Copyright (c) 2022 Liu Baihao. All rights reserved.
-// This software is licensed under MIT License.
+// This software is licensed under the MIT License.
 
 #include "Service.h"
 #include "SudoConfiguration.h"
@@ -12,11 +12,11 @@
 static SERVICE_STATUS ServiceStatus;
 static SERVICE_STATUS_HANDLE ServiceStatusHandle;
 static HANDLE LogFileHandle;
-static TCHAR ProgramDirectory[MAX_PATH + 1] = {TEXT('\0')};
+static TCHAR ProgramDirectory[MAX_PATH] = {TEXT('\0')};
 
 _Success_(return) BOOL QueryTokenInformation(_In_ HANDLE token, _In_ TOKEN_INFORMATION_CLASS tokenInfoClass, _Out_opt_ LPVOID tokenInfo) {
     DWORD size;
-    GetTokenInformation(token, tokenInfoClass, NULL, 0, &size); // Get the size of information.
+    GetTokenInformation(token, tokenInfoClass, NULL, 0, &size);
     return GetTokenInformation(token, tokenInfoClass, tokenInfo, size, &size);
 }
 
@@ -33,7 +33,6 @@ BOOL TokenIsElevated(_In_ HANDLE token) {
 DWORD LaunchElevatedProcess(DWORD clientProcessId, LPTSTR username, LPTSTR commandLine,
                             ULONG_PTR consoleReference, DWORD environmentSize, LPTCH environment,
                             LPTSTR workingDirectory, LPTSTR launcher, PULONG_PTR newProcess) {
-    // Unused parameters.
     UNREFERENCED_PARAMETER(environmentSize);
 
     WriteLogEx(TEXT("New elevating request:\r\n"
@@ -47,24 +46,21 @@ DWORD LaunchElevatedProcess(DWORD clientProcessId, LPTSTR username, LPTSTR comma
         goto InitFailed;
     }
 
-    // Used to set the new process attributes.
     STARTUPINFOEX startupInfoEx = {
         .StartupInfo.cb = sizeof(STARTUPINFOEX)
     };
 
-    // Sets the new process attributes.
     {
-        size_t returnLength = 0;
+        size_t listSize = 0;
 
-        InitializeProcThreadAttributeList(NULL, 2, 0, &returnLength);
-        startupInfoEx.lpAttributeList = (LPPROC_THREAD_ATTRIBUTE_LIST) malloc(returnLength);
+        InitializeProcThreadAttributeList(NULL, 2, 0, &listSize);
+        startupInfoEx.lpAttributeList = (LPPROC_THREAD_ATTRIBUTE_LIST) malloc(listSize);
         if (startupInfoEx.lpAttributeList == NULL) {
             SetLastError(ERROR_NOT_ENOUGH_MEMORY);
             goto Failed;
         }
 
-        // Initialize the attribute list.
-        if (!InitializeProcThreadAttributeList(startupInfoEx.lpAttributeList, 2, 0, &returnLength)) {
+        if (!InitializeProcThreadAttributeList(startupInfoEx.lpAttributeList, 2, 0, &listSize)) {
             goto Failed;
         }
 
@@ -86,9 +82,9 @@ DWORD LaunchElevatedProcess(DWORD clientProcessId, LPTSTR username, LPTSTR comma
     }
 
     if (!TokenIsElevated(clientToken)) {
-        // Launches the helper program to authentication the request.
+        // Launches the helper program to authentication the request
 
-        TCHAR helperCommandLine[MAX_PATH + 2 + USERNAME_MAX_LENGTH + 2 + 4 + 1];
+        TCHAR helperCommandLine[MAX_PATH + 3 + USERNAME_MAX_LENGTH + 3 + 4];
         _stprintf_s(helperCommandLine, sizeof(helperCommandLine) / sizeof(TCHAR),
                     TEXT("\"%sSudoHelper.exe\" \"%s\" %s"), ProgramDirectory, username, launcher);
 
@@ -143,8 +139,7 @@ DWORD LaunchElevatedProcess(DWORD clientProcessId, LPTSTR username, LPTSTR comma
             goto Failed;
         }
 
-        // Gets the elevated token of the user.
-
+        // Gets the elevated token of the user
         TOKEN_LINKED_TOKEN linkedToken;
         if (!QueryTokenInformation(clientToken, TokenLinkedToken, &linkedToken)) {
             goto Failed;
@@ -236,7 +231,7 @@ void ServiceLog(LPTSTR message, enum LOG_MESSAGE_TYPE messageType) {
     TCHAR formattedTime[128];
     DWORD formattedTimeSize;
 
-    // Gets the formatted time.
+    // Gets the formatted time
     {
         time_t nowTime;
         struct tm timeStruct;
@@ -301,12 +296,12 @@ void WINAPI ServiceMain(DWORD argc, LPTSTR *argv) {
     ServiceStatus.dwWaitHint = 0;
     ServiceStatusHandle = RegisterServiceCtrlHandler(TEXT("SudoService"), ServiceControlHandler);
 
-    // Opens the log file.
+    // Opens the log file
     {
-        TCHAR logFile[MAX_PATH + 1] = {TEXT('\0')};
-        TCHAR tempDirectory[MAX_PATH + 1] = {TEXT('\0')};
+        TCHAR logFile[MAX_PATH] = {TEXT('\0')};
+        TCHAR tempDirectory[MAX_PATH] = {TEXT('\0')};
 
-        GetEnvironmentVariable(TEXT("TEMP"), tempDirectory, MAX_PATH);
+        GetEnvironmentVariable(TEXT("TEMP"), tempDirectory, MAX_PATH - 1);
 
         if (_taccess(tempDirectory, 0) == -1) {
             if (!CreateDirectory(tempDirectory, NULL)) {
@@ -314,8 +309,8 @@ void WINAPI ServiceMain(DWORD argc, LPTSTR *argv) {
             }
         }
 
-        _tcscat_s(logFile, MAX_PATH, tempDirectory);
-        _tcscat_s(logFile, MAX_PATH, TEXT("\\SudoService.log"));
+        _tcscat_s(logFile, MAX_PATH - 1, tempDirectory);
+        _tcscat_s(logFile, MAX_PATH - 1, TEXT("\\SudoService.log"));
 
         if (_waccess(logFile, 0) == -1) {
             LogFileHandle = CreateFile(logFile, GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ,
@@ -327,7 +322,7 @@ void WINAPI ServiceMain(DWORD argc, LPTSTR *argv) {
         #ifdef UNICODE
             WORD header = 0xfeff;
             WriteFile(LogFileHandle, &header, sizeof(WORD), NULL, NULL);
-        #endif // UNICODE
+        #endif
         } else {
             LogFileHandle = CreateFile(logFile, GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ,
                                        NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
@@ -344,7 +339,7 @@ void WINAPI ServiceMain(DWORD argc, LPTSTR *argv) {
                 header = 0xfeff;
                 WriteFile(LogFileHandle, &header, sizeof(WORD), NULL, NULL);
             }
-        #endif // UNICODE
+        #endif
 
             SetFilePointer(LogFileHandle, 0, NULL, FILE_END);
         }
@@ -361,7 +356,7 @@ void WINAPI ServiceMain(DWORD argc, LPTSTR *argv) {
 
     WriteLog(TEXT("Sudo for Windows Service started."), LOG_MESSAGE_INFO);
 
-    GetModuleFileName(NULL, ProgramDirectory, MAX_PATH);
+    GetModuleFileName(NULL, ProgramDirectory, MAX_PATH - 1);
     _tcsrchr(ProgramDirectory, TEXT('\\'))[1] = '\0';
 
     ServiceStatus.dwWin32ExitCode = ServiceRun();

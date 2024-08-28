@@ -1,7 +1,8 @@
 // Copyright (c) 2022 Liu Baihao. All rights reserved.
-// This software is licensed under MIT License.
+// This software is licensed under the MIT License.
 
 #include "Password.h"
+
 
 _Success_(return) BOOL ReadPassword(_Out_writes_z_(PASSWORD_MAX_LENGTH + 1) LPTSTR password) {
     TCHAR ch;
@@ -10,7 +11,7 @@ _Success_(return) BOOL ReadPassword(_Out_writes_z_(PASSWORD_MAX_LENGTH + 1) LPTS
     password[PASSWORD_MAX_LENGTH] = '\0';
 
     while (true) {
-        // Read a character from the console (no echo).
+        // Reads a character from the console (no echo)
         ch = _gettch();
 
         switch (ch) {
@@ -19,28 +20,27 @@ _Success_(return) BOOL ReadPassword(_Out_writes_z_(PASSWORD_MAX_LENGTH + 1) LPTS
             break;
 
         case TEXT('\x3'): // Ctrl+C
-            // The operation cancelled by the user.
             SetLastError(ERROR_CANCELLED);
             _tprintf(TEXT("\r\n"));
             return FALSE;
 
-        case TEXT('\r'): // Press enter.
-            password[size] = '\0';
+        case TEXT('\r'): // Enter
+            password[size] = TEXT('\0');
             _tprintf(TEXT("\r\n"));
             return TRUE;
 
-        case TEXT('\b'): // Press backspace.
+        case TEXT('\b'): // Backspace
             if (size != 0) {
-                password[-- size] = '\0';
+                password[--size] = '\0';
             }
             break;
 
         default:
-            password[size ++] = ch;
+            password[size++] = ch;
             break;
         }
 
-        // The password is too long.
+        // The password is too long
         if (size == PASSWORD_MAX_LENGTH) {
             SetLastError(ERROR_BUFFER_OVERFLOW);
             _tprintf(TEXT("\r\n"));
